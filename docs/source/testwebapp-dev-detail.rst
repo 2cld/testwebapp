@@ -163,7 +163,9 @@ Just getting things setup for baseline ReactJS project with documentation on goo
 
 #. npm shrinkwrap use this to freeze package updates
     #. copy package.json and npm-shrinkwrap.json files to freeze packages
-    #. run npm install (which loads up the shrinkwrap)
+    #. run "npm install" (which loads up the shrinkwrap)
+
+#. Add react-devtools-chrome_ should get the react icon in the upper right of chrome browser
 
 #. Create the git repo gooberu-testwebapp-github_
     #. Goto gooberu-github_ create testwebapp repo
@@ -181,11 +183,15 @@ Just getting things setup for baseline ReactJS project with documentation on goo
     macci:docs cat$ vi source/conf.py (Bump minor version to 0.0.1 to match checkpoint-01)
     macci:docs cat$ make html 
     macci:docs cat$ open build/html/index.html (verify docs)
-    macci:testwebapp cat$ cd ~/bast23/testwebapp
+    macci:docs cat$ cd ~/bast23/testwebapp
+    macci:testwebapp cat$ git init
     macci:testwebapp cat$ git add *
+    macci:testwebapp cat$ git add .eslintrc  
+    macci:testwebapp cat$ git add .gitignore
     macci:testwebapp cat$ git commit -m "commit for testwebapp-checkpoint-01"
     macci:testwebapp cat$ git tag testwebapp-checkpoint-01
-    macci:testwebapp cat$ git push
+    macci:testwebapp cat$ git remote add origin https://github.com/gooberu/testwebapp.git
+    macci:testwebapp cat$ git push --set-upstream origin master
     macci:testwebapp cat$ git push origin testwebapp-checkpoint-01
 
 #. Create gooberu-testwebapp-readthedocs_
@@ -195,6 +201,7 @@ Just getting things setup for baseline ReactJS project with documentation on goo
     #. Verify gooberu-testwebapp-readthedocs_
 
 #. Verify checkpoint testwebapp-checkpoint-01_ Baseline
+
 
 
 Step Template
@@ -263,6 +270,8 @@ Resources
 .. _gooberu-testwebapp-release-sprints: https://github.com/gooberu/testwebapp/projects
 .. _gooberu-docs-Architecture: https://docs.google.com/document/d/1FvM15Qytp0HsxGR6Tm3dTKDvYsCZbecjis9G_oCLgo8
 .. _download-UbuntuFontFamily: https://fonts.google.com/download?family=Ubuntu
+
+.. _react-devtools-chrome: https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi/related?hl=en
 
 .. _firebase-console: https://console.firebase.google.com/
 .. _firebase-testwebapp-console: https://console.firebase.google.com/project/gooberu-testwebapp/overview
