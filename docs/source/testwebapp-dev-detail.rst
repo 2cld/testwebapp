@@ -1,8 +1,8 @@
 testwebapp dev detail
 =====================
 
-Step - testwebapp-checkpoint-01_
---------------------------------
+Step-01 - testwebapp-checkpoint-01_
+-----------------------------------
 
 Just getting things setup for baseline ReactJS project with documentation on gooberu-testwebapp-readthedocs_
 
@@ -202,6 +202,122 @@ Just getting things setup for baseline ReactJS project with documentation on goo
 
 #. Verify checkpoint testwebapp-checkpoint-01_ Baseline
 
+Step-02 - testwebapp-checkpoint-02_
+-----------------------------------
+
+The BasicReactSetup Step-02 intent is to setup a static mock, state and dataflow.
+
+#. Create BasicReactSetup for testwebapp-checkpoint-02_
+
+#. App Components
+    #. NavBar
+    #. SessionDashboard
+        #. SessionList
+        #. SessionListItem
+        #. SessionChat
+    #. SubjectSearch
+        #. SubjectList
+        #. SubjectListItem
+        #. SubjectSessionRequest
+
+#. Semantic UI framework css-sematic-ui_
+    #. in package.json verify "semantic-ui-css" and "semantic-ui-react" are loaded
+    #. in index.js - import 'sematic-ui-css/sematic.min.css';
+    #. in index.css - add css styles for sematic-ui
+    #. in app/layout/App.jsx
+        #. import { Button } from 'semantic-ui-react';
+        #. Add <Button icon="smile" content="React Button"/>
+
+#. Build components in the Folder structure from /src ::
+
+        catmini:src cat$ tree
+        .
+        ├── app
+        │   └── layout
+        │       └── App.jsx
+        ├── features
+        │   ├── nav
+        │   │   └── NavBar
+        │   │       └── NavBar.jsx
+        │   ├── session
+        │   │   ├── SessionDashboard
+        │   │   │   └── SessionDashboard.jsx
+        │   │   ├── SessionForm
+        │   │   │   └── SessionForm.jsx
+        │   │   └── SessionList
+        │   │       ├── SessionList.jsx
+        │   │       ├── SessionListAttendee.jsx
+        │   │       └── SessionListItem.jsx
+        │   └── subject
+        │       ├── SubjectDashboard
+        │       │   └── SubjectDashboard.jsx
+        │       ├── SubjectForm
+        │       │   └── SubjectForm.jsx
+        │       └── SubjectList
+        │           ├── SubjectList.jsx
+        │           ├── SubjectListItem.jsx
+        │           └── SubjectListProvider.jsx
+        ├── index.css
+        ├── index.js
+        └── registerServiceWorker.js
+
+        13 directories, 15 files
+
+#. Jamb some data into the SessionsDashboard and pass it to SessionList to expand
+    #. In SessionDashboard.jsx "const sessions = [...]"
+    #. Send sessions to EventList via the "this.props"
+    #. Use that array to expand out and create the list.
+
+#. Figure out where State should live
+    #. Is it passed in from a parent via props ? (if so, probably not state)
+    #. Does it change over time ? (if not, probably not state)
+    #. Can you compute it base on other state or props ? (if so, probably not state)
+    #. What is State for us ?
+        #. Sessions [] - Statefull
+        #. isOpen - Statefull
+        #. SessionForm - (forms manage state) - Statefull
+        #. Navbar - (CreateSession, Login, Signout are user interaction) - Statefull
+
+#. Put statefullness in src/features/session/SessionDashboard/SessionDashboard.jsx ::
+
+    class SessionDashboard extends Component {
+    state = {
+        sessions: sessionsDashboard,
+        isOpen: false
+    };
+
+#. Hook up the buttons add method to SessionDashboard class :: 
+
+    handleFormOpen = () => { // This pattern binds 
+    // handleFormOpen = (passVar) => () = { // This pattern allows props to the function
+        // console.log(passVar);
+        this.setState({
+        isOpen: true
+        });
+    };
+
+    handleCancel = () => {
+        this.setState({
+        isOpen: false
+        });
+    };
+
+#. Produce testwebapp-checkpoint-02_ BasicReactSetup::
+
+    macci:testwebapp cat$ cd ~/bast23/testwebapp/docs
+    macci:docs cat$ vi source/testwebapp-dev-detail.rst (update doc)
+    macci:docs cat$ vi source/conf.py (Bump minor version to X.X.NN to match checkpoint-02)
+    macci:docs cat$ make html 
+    macci:docs cat$ open build/html/index.html (verify docs)
+    macci:testwebapp cat$ cd ~/bast23/testwebapp
+    macci:testwebapp cat$ git add *
+    macci:testwebapp cat$ git commit -m "commit for testwebapp-checkpoint-02 - BasicReactSetup"
+    macci:testwebapp cat$ git tag testwebapp-checkpoint-02
+    macci:testwebapp cat$ git push
+    macci:testwebapp cat$ git push origin testwebapp-checkpoint-02
+    
+#. Verify checkpoint testwebapp-checkpoint-02_
+
 
 
 Step Template
@@ -217,7 +333,7 @@ The NAME_OF_GOAL Step-NN intent is to blahblahblah.
     #. tbd  
     #. tbd 
 
-#. Produce testwebapp-checkpoint-NN_ NAME_OF_GOAL
+#. Produce testwebapp-checkpoint-NN_ NAME_OF_GOAL ::
 
     macci:testwebapp cat$ cd ~/bast23/testwebapp/docs
     macci:docs cat$ vi source/testwebapp-dev-detail.rst (update doc)
@@ -243,7 +359,7 @@ Resources
 #. ReadTheDocs demo files: 2cld-readthedocs-demo_
 #. GooberU site Architecture document at gooberu-docs-Architecture_
 #. GooberU local test site at gooberu-testwebapp-localserver_
-#. Ubuntu Font Family at download-UbuntuFontFamily_
+#. Semantic-ui CSS framework css-sematic-ui_
 #. Firebase console (based on google login) firebase-console_
 #. Firebase testwebapp console firebase-testwebapp-console_
 #. Firebase debug cert help firebase-debug-cert_
@@ -272,6 +388,8 @@ Resources
 .. _download-UbuntuFontFamily: https://fonts.google.com/download?family=Ubuntu
 
 .. _react-devtools-chrome: https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi/related?hl=en
+
+.. _css-sematic-ui: https://semantic-ui.com/
 
 .. _firebase-console: https://console.firebase.google.com/
 .. _firebase-testwebapp-console: https://console.firebase.google.com/project/gooberu-testwebapp/overview
