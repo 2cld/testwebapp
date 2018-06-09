@@ -4,7 +4,7 @@ import SubjectListProvider from './SubjectListProvider'
 
 class SubjectListItem extends Component {
   render() {
-    const {subject} = this.props
+    const {subject, onSubjectOpen, deleteSubject} = this.props
     return (
       <Segment.Group>
         <Segment>
@@ -28,15 +28,16 @@ class SubjectListItem extends Component {
         </Segment>
         <Segment secondary>
           <List horizontal>
-          {subject.attendees.map((attendee) => (
+          {subject.attendees && subject.attendees.map((attendee) => (
             <SubjectListProvider key={attendee.id} attendee={attendee}/>
           ))}
 
           </List>
         </Segment>
         <Segment clearing>
-        <span>{subject.description}</span>
-          <Button as="a" color="teal" floated="right" content="View" />
+          <span>{subject.description}</span>
+          <Button onClick={deleteSubject(subject.id)} as="a" color="red" floated="right" content="Delete" />
+          <Button onClick={onSubjectOpen(subject)} as="a" color="teal" floated="right" content="View" />
         </Segment>
       </Segment.Group>
     );

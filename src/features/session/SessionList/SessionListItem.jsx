@@ -4,7 +4,7 @@ import SessionListAttendee from './SessionListAttendee'
 
 class SessionListItem extends Component {
   render() {
-    const {session} = this.props
+    const {session, onSessionOpen, deleteSession} = this.props
     return (
       <Segment.Group>
         <Segment>
@@ -28,15 +28,15 @@ class SessionListItem extends Component {
         </Segment>
         <Segment secondary>
           <List horizontal>
-          {session.attendees.map((attendee) => (
+          {session.attendees && session.attendees.map((attendee) => (
             <SessionListAttendee key={attendee.id} attendee={attendee}/>
           ))}
-
           </List>
         </Segment>
         <Segment clearing>
         <span>{session.description}</span>
-          <Button as="a" color="teal" floated="right" content="View" />
+          <Button onClick={deleteSession(session.id)} as="a" color="red" floated="right" content="Delete" />
+          <Button onClick={onSessionOpen(session)} as="a" color="teal" floated="right" content="View" />
         </Segment>
       </Segment.Group>
     );

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Grid, Button } from 'semantic-ui-react';
+import cuid from 'cuid';
 import SessionList from '../SessionList/SessionList';
 import SessionForm from '../SessionForm/SessionForm';
 
@@ -7,7 +8,7 @@ const sessionsDashboard = [
   {
     id: '1',
     title: 'Physics 223 prep for Midterm',
-    date: '2018-03-27T11:00:00+00:00',
+    date: '2018-03-27',
     category: 'culture',
     description:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sollicitudin ligula eu leo tincidunt, quis scelerisque magna dapibus. Sed eget ipsum vel arcu vehicula ullamcorper.',
@@ -31,7 +32,7 @@ const sessionsDashboard = [
   {
     id: '2',
     title: 'Chemistry 101 Midterm Exam',
-    date: '2018-03-28T14:00:00+00:00',
+    date: '2018-03-28',
     category: 'drinks',
     description:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sollicitudin ligula eu leo tincidunt, quis scelerisque magna dapibus. Sed eget ipsum vel arcu vehicula ullamcorper.',
@@ -57,11 +58,13 @@ const sessionsDashboard = [
 class SessionDashboard extends Component {
   state = {
     sessions: sessionsDashboard,
-    isOpen: false
+    isOpen: false,
+    selectedSession: null
   };
 
   handleFormOpen = () => {
     this.setState({
+      selectedSession: null,
       isOpen: true
     });
   };
@@ -72,11 +75,54 @@ class SessionDashboard extends Component {
     });
   };
 
+  handleCreateSession = (newSession) => {
+    newSession.id = cuid();
+    newSession.hostPhotoURL = '/assets/user.png';
+    const updatedSessions = [...this.state.sessions, newSession];
+    this.setState({
+      sessions: updatedSessions,
+      isOpen: false
+    })
+  }
+
+  handleReadSession = (sessionToRead) => () => {
+    this.setState({
+      selectedSession: sessionToRead,
+      isOpen: true
+    })
+  } 
+
+  handleUpdateSession = (updatedSession) => {
+    this.setState({
+      sessions: this.state.sessions.map(session => {
+        if (session.id === updatedSession.id) {
+          return Object.assign({}, updatedSession)
+        } else {
+          return session
+        }
+      }),
+      isOpen: false,
+      selectedSession: null
+    })
+  }
+
+  handleDeleteSession = (sessionId) => () => {
+    const updatedSessions = this.state.sessions.filter(e => e.id !== sessionId);
+    this.setState({
+      sessions: updatedSessions
+    })
+  }
+
   render() {
+    const {selectedSession} = this.state;
     return (
       <Grid>
         <Grid.Column width={10}>
-          <SessionList sessions={this.state.sessions} />
+          <SessionList 
+            deleteSession={this.handleDeleteSession} 
+            sessions={this.state.sessions} 
+            onSessionOpen={this.handleReadSession}
+          />
         </Grid.Column>
         <Grid.Column width={6}>
           <Button
@@ -84,7 +130,13 @@ class SessionDashboard extends Component {
             positive
             content="Create Session"
           />
-          {this.state.isOpen && <SessionForm handleCancel={this.handleCancel} />}
+          {this.state.isOpen && <SessionForm  
+            selectedSession={selectedSession} 
+            createSession={this.handleCreateSession} 
+            updateSession={this.handleUpdateSession} 
+            handleCancel={this.handleCancel}
+            />
+          }
         </Grid.Column>
       </Grid>
     );
