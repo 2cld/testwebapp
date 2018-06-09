@@ -527,6 +527,142 @@ The CRUDForms Step-03 intent is to get the forms event state and data flow and g
     
 #. Verify checkpoint testwebapp-checkpoint-03_
 
+Step-04 - testwebapp-checkpoint-04_
+-----------------------------------
+
+The ReactNavRouter Step-04 intent is to create page navigation in our React SPA application.
+
+#. Create ReactNavRouter for testwebapp-checkpoint-04_
+#. Create some navigation stateless functional componets
+#. Create the SPA pages to get the following tree ::
+
+        catmini:features cat$ tree
+        .
+        ├── home
+        │   └── HomePage.jsx
+        ├── nav
+        │   └── NavBar
+        │       └── NavBar.jsx
+        ├── session
+        │   ├── SessionDashboard
+        │   │   └── SessionDashboard.jsx
+        │   ├── SessionDetail
+        │   │   └── SessionDetailPage.jsx
+        │   ├── SessionForm
+        │   │   └── SessionForm.jsx
+        │   └── SessionList
+        │       ├── SessionList.jsx
+        │       ├── SessionListAttendee.jsx
+        │       └── SessionListItem.jsx
+        ├── subject
+        │   ├── SubjectDashboard
+        │   │   └── SubjectDashboard.jsx
+        │   ├── SubjectDetail
+        │   │   └── SubjectDetailPage.jsx
+        │   ├── SubjectForm
+        │   │   └── SubjectForm.jsx
+        │   └── SubjectList
+        │       ├── SubjectList.jsx
+        │       ├── SubjectListItem.jsx
+        │       └── SubjectListProvider.jsx
+        └── user
+            ├── PeopleDashboard
+            │   └── PeopleDashboard.jsx
+            ├── Settings
+            │   ├── AboutPage.jsx
+            │   ├── AccountPage.jsx
+            │   ├── BasicPage.jsx
+            │   ├── PhotosPage.jsx
+            │   ├── SettingsDashboard.jsx
+            │   └── SettingsNav.jsx
+            └── UserDetail
+                └── UserDetailPage.jsx
+
+        17 directories, 22 files
+
+#. Now we can setup some navigation and have pages to navigate to
+#. Check we have "react-router-dom" and "react-router-redux" in package.json
+#. Put BrowserRouter around the App in index.js
+#. Call Route component in App.jsx
+#. Fill out the Route table in App.jsx
+#. yarn run then browse to http://localhost:3000/subjects and you should see the subjects list
+#. Now connect the routes into NavBar.jsx
+#. Layout pages and hack in auth for just look and feel
+#. Internal Navigation with Settings and add Settings Nav
+#. Test stuff by clicking through various pages
+#. Now SPA pages should have following tree ::
+
+    catmini:src cat$ tree
+    .
+    ├── app
+    │   └── layout
+    │       └── App.jsx
+    ├── features
+    │   ├── home
+    │   │   └── HomePage.jsx
+    │   ├── nav
+    │   │   ├── Menus
+    │   │   │   ├── SignedInMenu.jsx
+    │   │   │   └── SignedOutMenu.jsx
+    │   │   └── NavBar
+    │   │       └── NavBar.jsx
+    │   ├── session
+    │   │   ├── SessionDashboard
+    │   │   │   └── SessionDashboard.jsx
+    │   │   ├── SessionDetail
+    │   │   │   └── SessionDetailPage.jsx
+    │   │   ├── SessionForm
+    │   │   │   └── SessionForm.jsx
+    │   │   └── SessionList
+    │   │       ├── SessionList.jsx
+    │   │       ├── SessionListAttendee.jsx
+    │   │       └── SessionListItem.jsx
+    │   ├── subject
+    │   │   ├── SubjectDashboard
+    │   │   │   └── SubjectDashboard.jsx
+    │   │   ├── SubjectDetail
+    │   │   │   └── SubjectDetailPage.jsx
+    │   │   ├── SubjectForm
+    │   │   │   └── SubjectForm.jsx
+    │   │   └── SubjectList
+    │   │       ├── SubjectList.jsx
+    │   │       ├── SubjectListItem.jsx
+    │   │       └── SubjectListProvider.jsx
+    │   └── user
+    │       ├── PeopleDashboard
+    │       │   └── PeopleDashboard.jsx
+    │       ├── Settings
+    │       │   ├── AboutPage.jsx
+    │       │   ├── AccountPage.jsx
+    │       │   ├── BasicPage.jsx
+    │       │   ├── PhotosPage.jsx
+    │       │   ├── SettingsDashboard.jsx
+    │       │   └── SettingsNav.jsx
+    │       └── UserDetail
+    │           └── UserDetailPage.jsx
+    ├── index.css
+    ├── index.js
+    └── registerServiceWorker.js
+
+    21 directories, 28 files
+
+
+#. Produce testwebapp-checkpoint-04_ ReactNavRouter ::
+
+    macci:testwebapp cat$ cd ~/bast23/testwebapp/docs
+    macci:docs cat$ vi source/testwebapp-dev-detail.rst (update doc)
+    macci:docs cat$ vi source/conf.py (Bump minor version to X.X.NN to match checkpoint-04)
+    macci:docs cat$ make html 
+    macci:docs cat$ open build/html/index.html (verify docs)
+    macci:testwebapp cat$ cd ~/bast23/testwebapp
+    macci:testwebapp cat$ git add *
+    macci:testwebapp cat$ git commit -m "commit for testwebapp-checkpoint-04 - ReactNavRouter"
+    macci:testwebapp cat$ git tag testwebapp-checkpoint-04
+    macci:testwebapp cat$ git push
+    macci:testwebapp cat$ git push origin testwebapp-checkpoint-04
+    
+#. Verify checkpoint testwebapp-checkpoint-04_
+
 Step Template
 =============
 
