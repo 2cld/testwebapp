@@ -1,19 +1,36 @@
 import React, { Component } from "react";
+import { connect } from 'react-redux';
+import cuid from 'cuid';
 import { Segment, Form, Button } from "semantic-ui-react";
+import { createSession, updateSession } from "../sessionActions";
 
-const emptySession = {
-  title: "",
-  date: "",
-  city: "",
-  venue: "",
-  hostedBy: ""
-};
+
+const mapState = (state, ownProps) => {
+  const sessionId = ownProps.match.params.id;
+  let session = {
+    title: "",
+    date: "",
+    city: "",
+    venue: "",
+    hostedBy: ""
+  }
+  if (sessionId && state.session.lenght > 0) {
+    session = state.sessions.filter(session => session.id === sessionId)[0]
+  }
+  return { session }
+}
+
+const actions = {
+  createSession,
+  updateSession
+}
 
 class SessionForm extends Component {
   state = {
-    session: emptySession
+    session: Object.assign({}, this.props.session)
   };
 
+  /*
   componentDidMount() {
     if (this.props.selectedSession !== null) {
       this.setState({
@@ -29,13 +46,21 @@ class SessionForm extends Component {
       });
     }
   }
+  */
 
   onFormSubmit = (evt) => {
     evt.preventDefault();
     if (this.state.session.id) {
       this.props.updateSession(this.state.session);
+      this.props.history.goBack();
     } else {
-      this.props.createSession(this.state.session);
+      const newSession = {
+        ...this.state.session,
+        id: cuid(),
+        hostPhotoURL: '/assets/user.png'
+      }
+      this.props.createSession(newSession);
+      this.props.history.push('/sessions');
     }
   };
 
@@ -99,16 +124,12 @@ class SessionForm extends Component {
               placeholder="Enter the name of person hosting"
             />
           </Form.Field>
-          <Button positive type="submit">
-            Submit
-          </Button>
-          <Button onClick={handleCancel} type="button">
-            Cancel
-          </Button>
+          <Button positive type="submit">Submit</Button>
+          <Button onClick={this.props.history.goBack} type="button">Cancel</Button>
         </Form>
       </Segment>
     );
   }
 }
 
-export default SessionForm;
+export default connect(mapState, actions)(SessionForm);

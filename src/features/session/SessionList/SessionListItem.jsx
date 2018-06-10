@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { Segment, Item, Icon, List, Button } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
 import SessionListAttendee from './SessionListAttendee'
 
 class SessionListItem extends Component {
   render() {
-    const {session, onSessionOpen, deleteSession} = this.props
+    const {session, deleteSession} = this.props
     return (
       <Segment.Group>
         <Segment>
@@ -36,7 +37,7 @@ class SessionListItem extends Component {
         <Segment clearing>
         <span>{session.description}</span>
           <Button onClick={deleteSession(session.id)} as="a" color="red" floated="right" content="Delete" />
-          <Button onClick={onSessionOpen(session)} as="a" color="teal" floated="right" content="View" />
+          <Button as={Link} to={`/session/${session.id}`} color="teal" floated="right" content="View" />
         </Segment>
       </Segment.Group>
     );

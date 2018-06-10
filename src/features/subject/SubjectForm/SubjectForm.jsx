@@ -59,6 +59,7 @@ class SubjectForm extends Component {
             <label>Subject Title</label>
             <input name='title' onChange={this.onInputChange} value={subject.title} placeholder="Subject Title" />
           </Form.Field>
+          {/*
           <Form.Field>
             <label>Subject Date</label>
             <input name='date' onChange={this.onInputChange} value={subject.date} type="date" placeholder="Subject Date" />
@@ -71,8 +72,9 @@ class SubjectForm extends Component {
             <label>Venue</label>
             <input name='venue' onChange={this.onInputChange} value={subject.venue} placeholder="Enter the Venue of the subject" />
           </Form.Field>
+          */}
           <Form.Field>
-            <label>Hosted By</label>
+            <label>GooberU Host</label>
             <input name='hostedBy' onChange={this.onInputChange} value={subject.hostedBy} placeholder="Enter the name of person hosting" />
           </Form.Field>
           <Button positive type="submit">

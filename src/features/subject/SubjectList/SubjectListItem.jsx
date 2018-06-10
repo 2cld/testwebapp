@@ -20,6 +20,7 @@ class SubjectListItem extends Component {
             </Item>
           </Item.Group>
         </Segment>
+{/*
         <Segment>
           <span>
             <Icon name="clock" /> {subject.date}|
@@ -34,9 +35,12 @@ class SubjectListItem extends Component {
 
           </List>
         </Segment>
+*/}
         <Segment clearing>
           <span>{subject.description}</span>
+          {/*
           <Button onClick={deleteSubject(subject.id)} as="a" color="red" floated="right" content="Delete" />
+          */}
           <Button onClick={onSubjectOpen(subject)} as="a" color="teal" floated="right" content="View" />
         </Segment>
       </Segment.Group>

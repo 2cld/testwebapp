@@ -12,6 +12,7 @@ import SessionForm from "../../features/session/SessionForm/SessionForm";
 import PeopleDashboard from "../../features/user/PeopleDashboard/PeopleDashboard";
 import UserDetailPage from "../../features/user/UserDetail/UserDetailPage";
 import SettingsDashboard from "../../features/user/Settings/SettingsDashboard";
+import TestComponent from "../../features/testarea/TestComponent";
 
 class App extends Component {
   render() {
@@ -27,14 +28,15 @@ class App extends Component {
               <NavBar />
               <Container className="main">
                 <Route path="/subjects" component={SubjectDashboard} />
-                <Route path="/subjects/:id" component={SubjectDetailPage} />
+                <Route path="/subject/:id" component={SubjectDetailPage} />
                 <Route path="/createSubject" component={SubjectForm} />
                 <Route path="/sessions" component={SessionDashboard} />
-                <Route path="/sessions/:id" component={SessionDetailPage} />
+                <Route path="/session/:id" component={SessionDetailPage} />
                 <Route path="/createSession" component={SessionForm} />
                 <Route path="/people" component={PeopleDashboard} />
                 <Route path="/profile/:id" component={UserDetailPage} />
                 <Route path="/settings" component={SettingsDashboard} />
+                <Route path="/test" component={TestComponent} />
               </Container>
             </div>
           )}

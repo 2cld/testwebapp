@@ -663,6 +663,61 @@ The ReactNavRouter Step-04 intent is to create page navigation in our React SPA 
     
 #. Verify checkpoint testwebapp-checkpoint-04_
 
+Step-05 - testwebapp-checkpoint-05_
+-----------------------------------
+
+The REDUX-Setup Step-05 intent is to add redux to this app.
+
+#. Create REDUX-Setup for testwebapp-checkpoint-05_
+#. Create a testarea in the application for scratchpad testing
+    #. mkdir src/features/testarea
+    #. vi src/features/testarea/TestComponent.jsx
+    #. add a route to the application
+#. Create a store (create the middleware javascript)
+    #. mkdir src/app/store
+    #. vi src/app/store/configureStore.js
+#. Create reducers 
+    #. mkdir src/app/reducers
+    #. vi src/app/reducers/rootReducer.js
+#. Bring in react-redux and configureStore into index.js
+#. Create testarea feature... lots of reducer module stuff... given time I'll go back through it all but
+#. Add Redux DevTools to Chrome via redux-devtools-chrome_
+#. Add composeWithDevTools into app/store/configureStore.js
+#. Add some redux actions in the testarea (get use to redux function use)
+#. Start converting to redux store
+#. Create actions for app
+#. In src/features/session create
+    #. sessionActions.jsx
+    #. sessionConstants.jsx create event names
+    #. sessionReducer.jsx
+#. Move the hack data into sessionReducer.jsx (remove from SessionDashboard.jsx)
+#. Import the sessionReducer into rootReducer
+#. Fix SessionDashboard
+#. Build SessionDetail view... lot of hack'n work... maybe I'll come back and explain later...
+#. Hack on Subject Search Box
+#. Hack on Auth enabled Views
+#. Stuff working... push it up ::
+
+    macci:testwebapp cat$ git add *
+    macci:testwebapp cat$ git commit -m "temp working commit for testwebapp-checkpoint-05 - REDUX-Setup"
+
+
+#. Produce testwebapp-checkpoint-05_ REDUX-Setup ::
+
+    macci:testwebapp cat$ cd ~/bast23/testwebapp/docs
+    macci:docs cat$ vi source/testwebapp-dev-detail.rst (update doc)
+    macci:docs cat$ vi source/conf.py (Bump minor version to X.X.NN to match checkpoint-05)
+    macci:docs cat$ make html 
+    macci:docs cat$ open build/html/index.html (verify docs)
+    macci:testwebapp cat$ cd ~/bast23/testwebapp
+    macci:testwebapp cat$ git add *
+    macci:testwebapp cat$ git commit -m "commit for testwebapp-checkpoint-05 - REDUX-Setup"
+    macci:testwebapp cat$ git tag testwebapp-checkpoint-05
+    macci:testwebapp cat$ git push
+    macci:testwebapp cat$ git push origin testwebapp-checkpoint-05
+    
+#. Verify checkpoint testwebapp-checkpoint-05_
+
 Step Template
 =============
 
@@ -731,6 +786,7 @@ Resources
 .. _download-UbuntuFontFamily: https://fonts.google.com/download?family=Ubuntu
 
 .. _react-devtools-chrome: https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi/related?hl=en
+.. _redux-devtools-chrome: https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd?hl=en
 
 .. _css-sematic-ui: https://semantic-ui.com/
 

@@ -32,11 +32,16 @@ class NavBar extends Component {
             GooberU
           </Menu.Item>
           <Menu.Item as={NavLink} to="/subjects" name="Subjects" />
-          {authenticated && (
-            <Menu.Item as={NavLink} to="/people" name="People" />
-          )}
-
-          {authenticated && (
+        {authenticated && (
+          <Menu.Item as={NavLink} to="/sessions" name="Sessions" />
+        )}
+        {authenticated && (
+          <Menu.Item as={NavLink} to="/test" name="Test" />
+        )}
+        {authenticated && (
+          <Menu.Item as={NavLink} to="/people" name="People" />
+        )}
+        {authenticated && (
             <Menu.Item>
               <Button
                 as={Link}
@@ -47,12 +52,12 @@ class NavBar extends Component {
                 content="Create Session"
               />
             </Menu.Item>
-          )}
-          {authenticated ? (
-            <SignedInMenu signOut={this.handleSignOut} />
-          ) : (
-            <SignedOutMenu signIn={this.handleSignIn} />
-          )}
+        )}
+        {authenticated ? (
+          <SignedInMenu signOut={this.handleSignOut} />
+        ) : (
+          <SignedOutMenu signIn={this.handleSignIn} />
+        )}
         </Container>
       </Menu>
     );

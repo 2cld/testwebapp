@@ -3,7 +3,7 @@ import SessionListItem from './SessionListItem'
 
 class SessionList extends Component {
   render() {
-    const {sessions, onSessionOpen, deleteSession} = this.props;
+    const {sessions, deleteSession} = this.props;
     return (
       <div>
         <h1>Session List</h1>
@@ -11,12 +11,9 @@ class SessionList extends Component {
           <SessionListItem 
             key={session.id} 
             session={session} 
-            onSessionOpen={onSessionOpen}
             deleteSession={deleteSession}
           />
         ))}
-
-
       </div>
     )
   }
