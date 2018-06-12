@@ -1,9 +1,9 @@
 import { createReducer } from "../../app/common/util/reducerUtil";
 import {
-  CREATE_SESSION,
-  DELETE_SESSION,
-  UPDATE_SESSION
-} from "./sessionConstants";
+  CREATE_SUBJECT,
+  DELETE_SUBJECT,
+  UPDATE_SUBJECT
+} from "./subjectConstants";
 
 const initialState = [
   {
@@ -56,23 +56,23 @@ const initialState = [
   }
 ];
 
-export const createSession = (state, payload) => {
-  return [...state, Object.assign({}, payload.session)];
+export const createSubject = (state, payload) => {
+  return [...state, Object.assign({}, payload.subject)];
 };
 
-export const updateSession = (state, payload) => {
+export const updateSubject = (state, payload) => {
   return [
-    ...state.filter(session => session.id !== payload.session.id),
-    Object.assign({}, payload.session)
+    ...state.filter(subject => subject.id !== payload.subject.id),
+    Object.assign({}, payload.subject)
   ];
 };
 
-export const deleteSession = (state, payload) => {
-  return [...state.filter(session => session.id !== payload.sessionId)];
+export const deleteSubject = (state, payload) => {
+  return [...state.filter(subject => subject.id !== payload.subjectId)];
 };
 
 export default createReducer(initialState, {
-  [CREATE_SESSION]: createSession,
-  [UPDATE_SESSION]: updateSession,
-  [DELETE_SESSION]: deleteSession
+  [CREATE_SUBJECT]: createSubject,
+  [UPDATE_SUBJECT]: updateSubject,
+  [DELETE_SUBJECT]: deleteSubject
 });

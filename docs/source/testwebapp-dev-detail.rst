@@ -701,6 +701,19 @@ The REDUX-Setup Step-05 intent is to add redux to this app.
     macci:testwebapp cat$ git add *
     macci:testwebapp cat$ git commit -m "temp working commit for testwebapp-checkpoint-05 - REDUX-Setup"
 
+#. Add form: FormReducer to rootReducer.js
+#. Connect FormReducer to SessionForm.jsx
+#. Convert form fields to Field component from FormReducer
+#. This gives the Redux access to the Form (makes managment of form events easier)
+#. Work on forms
+#. Add Revalidate to add validation to form
+#. DatePicker stuff and fix date stuff
+#. Convert Subject data to Redux store
+    #. Add subjectReducer to src/app/reducers/rootReducer.js
+    #. Add subjectActions.js, subjectConstants.jsx and subjectReducer.jsx files to src/features/subject
+    #. Create new SubjectForm.jsx with Redux store and validation
+    #. Adjust routes (aka send to SubjectForm in <Route path="/subject/:id" component={SubjectForm} /> )
+
 
 #. Produce testwebapp-checkpoint-05_ REDUX-Setup ::
 

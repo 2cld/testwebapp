@@ -14,8 +14,8 @@ const HomePage = ({history}) => {
             <div className="content">GooberU</div>
           </h1>
           <h2>??? got a yurn'n for learn'n and earn'n ???</h2>
-          <div onClick={() => history.push('/events')} className="ui huge white inverted button">
-            Get Started
+          <div onClick={() => history.push('/subjects')} className="ui huge white inverted button">
+            Goober yoUr Subject
             <i className="right arrow icon" />
           </div>
         </div>
