@@ -14,7 +14,11 @@ const initialState = [
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sollicitudin ligula eu leo tincidunt, quis scelerisque magna dapibus. Sed eget ipsum vel arcu vehicula ullamcorper.",
     city: "Ames, IA",
-    venue: "ISU Library",
+    venue: "Iowa State University Library, Morrill Road, Ames, IA, USA",
+    venueLatLng: {
+      lat: 42.0281254,
+      lng: -93.64881409999998
+    },
     hostedBy: "Bob",
     hostPhotoURL: "https://randomuser.me/api/portraits/men/20.jpg",
     attendees: [
@@ -38,7 +42,11 @@ const initialState = [
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sollicitudin ligula eu leo tincidunt, quis scelerisque magna dapibus. Sed eget ipsum vel arcu vehicula ullamcorper.",
     city: "Ames, IA",
-    venue: "Pizza Pit",
+    venue: "Pizza Pit Extreme, Welch Avenue, Ames, IA, USA",
+    venueLatLng: {
+      lat: 42.0210482,
+      lng: -93.65051140000003
+    },
     hostedBy: "Tom",
     hostPhotoURL: "https://randomuser.me/api/portraits/men/22.jpg",
     attendees: [

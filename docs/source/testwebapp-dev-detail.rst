@@ -713,7 +713,8 @@ The REDUX-Setup Step-05 intent is to add redux to this app.
     #. Add subjectActions.js, subjectConstants.jsx and subjectReducer.jsx files to src/features/subject
     #. Create new SubjectForm.jsx with Redux store and validation
     #. Adjust routes (aka send to SubjectForm in <Route path="/subject/:id" component={SubjectForm} /> )
-
+#. Fix broke stuff...
+#. Most things seem to work commit and tag
 
 #. Produce testwebapp-checkpoint-05_ REDUX-Setup ::
 
@@ -730,6 +731,266 @@ The REDUX-Setup Step-05 intent is to add redux to this app.
     macci:testwebapp cat$ git push origin testwebapp-checkpoint-05
     
 #. Verify checkpoint testwebapp-checkpoint-05_
+
+Step-06 - testwebapp-checkpoint-06_
+-----------------------------------
+
+The Google-Maps-Inetgration Step-06 intent is to blahblahblah.
+
+#. Create Google-Maps-Inetgration for testwebapp-checkpoint-06_
+#. Get API keys (using cat@bast23.com)
+    #. Search for google-api-console_
+    #. SelectProject -> + New Project
+        #. Project Name: gooberu-testwebapp
+        #. Organization: bast23.me
+        #. Location: bast23.me
+    #. Selet the gooberu-testwebapp project
+#. Enable "Google Maps JavaScript API"
+    #. Click on Library (on left)
+    #. Search for "maps"
+    #. Select Google Maps JavaScript API "ENABLE"
+    #. Click on "Credentials"
+    #. Click on "Create credentials" -> API key
+    #. Copy API key 'somewhere safe'
+#. Enable "Places API"
+    #. Click on Library (on left)
+    #. Search for "plaxe"
+    #. Select Places API "ENABLE"
+#. Enable "Geocoding API"
+    #. Click on Library (on left)
+    #. Search for "Geocoding"
+    #. Select "Geocoding API" API "ENABLE"
+#. Verify react-places-autocomplete_ is in package.json
+#. Test the react-places-autocomplete_ in our test table
+    #. Import::
+
+        import Script from 'react-load-script';
+        import GoogleMapReact from 'google-map-react';
+        import PlacesAutocomplete, {
+            geocodeByAddress,
+            getLatLng
+            } from 'react-places-autocomplete';
+
+    #. Add react-places-autocomplete_ script to testcomponent return::
+
+        <Script
+                url="https://maps.googleapis.com/maps/api/js?key=addapikey&libraries=places"
+                onLoad={this.handleScriptLoad}
+                />
+
+    #. Add react-places-autocomplete_ form to testcomponent return::
+
+        <form onSubmit={this.handleFormSubmit}>
+          {this.state.scriptLoaded && (
+            <PlacesAutocomplete inputProps={inputProps} />
+          )}
+          <button type="submit">Submit</button>
+        </form>
+
+    #. Add onChange, hanleFormSubmit and handleScripLoaded for react-places-autocomplete_ form::
+
+        //- make sure script is loaded before you use
+        handleScriptLoad = () => {
+            this.setState({ scriptLoaded: true });
+        };
+        //- add geo details to submit
+        handleFormSubmit = event => {
+            event.preventDefault();
+            geocodeByAddress(this.state.address)
+            .then(results => getLatLng(results[0]))
+            .then(latLng => console.log('Success', latLng))
+            .catch(error => console.error('Error', error));
+        };
+        //- update selectbox as typing
+        onChange = address => this.setState({ address });
+
+    #. Setup default props and state for react-places-autocomplete_ form::
+
+        static defaultProps = {
+            center: {
+            lat: 59.95,
+            lng: 30.33
+            },
+            zoom: 11
+        };
+        state = {
+            address: '',
+            scriptLoaded: false
+        };
+
+    #. Setup render return const used by react-places-autocomplete_ form::
+
+        const inputProps = {
+        value: this.state.address,
+        onChange: this.onChange
+        };
+
+    #. Test the input field through browser...
+
+#. Create a common component PlacesInput.jsx in src/app/common/form/PlacesInput.jsx
+    #. Create file src/app/common/form/PlacesInput.jsx
+    #. import PlacesInput into SessionForm.jsx
+    #. Use PlacesInput component for Session City::
+
+        <Field
+            name="city"
+            type="text"
+            component={PlaceInput}
+            options={{ types: ['(cities)'] }}
+            placeholder="Event city"
+            onSelect={this.handleCitySelect}
+        />
+
+    #. Test in browser
+    #. Use options to specify 'establishment' for venue::
+
+        <Field
+            name="venue"
+            type="text"
+            component={PlaceInput}
+            options={{
+                location: new google.maps.LatLng(this.state.cityLatLng),
+                radius: 1000,
+                types: ['establishment']
+            }}
+            placeholder="Event venue"
+            onSelect={this.handleVenueSelect}
+        />
+
+#. Narrow 'establishment' search to geo-area of city
+    #. Import Script from 'react-load-script', geocodeByAddress and getLatLng from react-places-autocomplete_ into SessionForm.jsx file::
+
+        import Script from 'react-load-script';
+        import { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
+
+    #. Create local state to keep city geo info in::
+
+        state = {
+            cityLatLng: {},
+            venueLatLng: {},
+            scriptLoaded: false
+        };
+
+    #. Create functions to handle input events and script load::
+
+        //- wait for script to load before use
+        handleScriptLoaded = () => this.setState({ scriptLoaded: true });
+        //- deal with city select events
+        handleCitySelect = selectedCity => {
+            geocodeByAddress(selectedCity)
+            .then(results => getLatLng(results[0]))
+            .then(latlng => {
+                this.setState({
+                cityLatLng: latlng
+                });
+            })
+            .then(() => {
+                this.props.change('city', selectedCity)
+            })
+        };
+        //- deal with venue select events
+        handleVenueSelect = selectedVenue => {
+            geocodeByAddress(selectedVenue)
+            .then(results => getLatLng(results[0]))
+            .then(latlng => {
+                this.setState({
+                venueLatLng: latlng
+                });
+            })
+            .then(() => {
+                this.props.change('venue', selectedVenue)
+            })
+        };
+
+    #. Add handleCitySelect to onSelect city event field::
+
+              {/* Pre-PlaceInput
+              <Field
+                name="city"
+                type="text"
+                component={TextInput}
+                placeholder="Session city"
+              />*/}
+              <Field
+                name="city"
+                type="text"
+                component={PlaceInput}
+                options={{ types: ['(cities)'] }}
+                placeholder="Event city"
+                onSelect={this.handleCitySelect}
+              />
+
+    #. Add handleVenueSelect to onSelect venue event field::
+
+        {/* Pre-PlaceInput
+            <Field
+                name="venue"
+                type="text"
+                component={TextInput}
+                placeholder="Session venue"
+            />
+        */}
+        {this.state.scriptLoaded &&
+            <Field
+                name="venue"
+                type="text"
+                component={PlaceInput}
+                options={{
+                    location: new google.maps.LatLng(this.state.cityLatLng),
+                    radius: 1000,
+                    types: ['establishment']
+                }}
+                placeholder="Event venue"
+                onSelect={this.handleVenueSelect}
+            />
+        }
+
+    #. Add google api script load to form render return::
+
+        return (
+            <Grid>
+                <Script
+                url="https://maps.googleapis.com/maps/api/js?key=apikey&libraries=places"
+                onLoad={this.handleScriptLoaded}
+                />
+
+    #. Add google globals to the top of SessionForm.jsx to get rid of lint error::
+
+        /*global google*/
+        /* ^^^ this ontop of file gets rid of lint error VVV below */
+            location: new google.maps.LatLng(this.state.cityLatLng),
+
+    #. Test, should get area specific venues.
+
+#. Add Geocoding info to Storage
+    #. Populate the venueLatLng state (both cityLatLan and venueLatLan have setState in handle functions)
+    #. In the onFromSubmit method, set values.venueLatLng = this.state.venueLatLng to pass data to reducer.
+    #. Test by adding a new Session and check Redux data to see the venueLatLng data in the trace.
+
+#. Add google maps display
+    #. Add Venue info to const intitialState in sessionReducer (for testing)
+    #. Test the google-map-react_ component in testarea
+    #. Create src/features/session/SessionDetail/SessionDetailMap.jsx
+    #. In src/features/session/SessionDetail/SessionDetailInfo.jsx change to a statefull component.
+    #. debug...
+    
+#. Produce testwebapp-checkpoint-06_ Google-Maps-Inetgration ::
+
+    macci:testwebapp cat$ cd ~/bast23/testwebapp/docs
+    macci:docs cat$ vi source/testwebapp-dev-detail.rst (update doc)
+    macci:docs cat$ vi source/conf.py (Bump minor version to X.X.NN to match checkpoint-06)
+    macci:docs cat$ make html 
+    macci:docs cat$ open build/html/index.html (verify docs)
+    macci:testwebapp cat$ cd ~/bast23/testwebapp
+    macci:testwebapp cat$ git add *
+    macci:testwebapp cat$ git commit -m "commit for testwebapp-checkpoint-06 - Google-Maps-Inetgration"
+    macci:testwebapp cat$ git tag testwebapp-checkpoint-06
+    macci:testwebapp cat$ git push
+    macci:testwebapp cat$ git push origin testwebapp-checkpoint-06
+    
+#. Verify checkpoint testwebapp-checkpoint-06_
+
+
 
 Step Template
 =============
@@ -781,6 +1042,7 @@ Resources
 #. firebase-testwebapp-Storage-Rules_
 #. firebase-testwebapp-Storage-Files_
 #. firebase-docs-database-query_
+#. google-map-react_
 #. youtube-FlutterWireUpFirebaseAuthiOS_
 #. Testflight documentation ios-docs-testflight_
 #. Testflight Tutorial youtube-ios-tutorial-testflight-1_
@@ -801,7 +1063,11 @@ Resources
 .. _react-devtools-chrome: https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi/related?hl=en
 .. _redux-devtools-chrome: https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd?hl=en
 
+.. _react-places-autocomplete: https://github.com/kenny-hibino/react-places-autocomplete
 .. _css-sematic-ui: https://semantic-ui.com/
+
+.. _google-api-console: https://console.cloud.google.com/apis?pli=1
+.. _google-map-react: https://github.com/google-map-react/google-map-react
 
 .. _firebase-console: https://console.firebase.google.com/
 .. _firebase-testwebapp-console: https://console.firebase.google.com/project/gooberu-testwebapp/overview
