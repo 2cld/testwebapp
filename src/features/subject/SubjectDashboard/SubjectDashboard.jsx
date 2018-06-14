@@ -1,66 +1,23 @@
 import React, { Component } from 'react';
 import { Grid, Button } from 'semantic-ui-react';
 import cuid from 'cuid';
+import { connect } from 'react-redux';
+import { deleteSubject } from '../subjectActions';
 import SubjectList from '../SubjectList/SubjectList';
 import SubjectForm from '../SubjectForm/SubjectForm';
+import LoadingComponent from '../../../app/layout/LoadingComponent'
 
-const subjectsDashboard = [
-  {
-    id: '1',
-    title: 'Physics 223 prep for Midterm',
-    date: '2018-03-27',
-    category: 'culture',
-    description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sollicitudin ligula eu leo tincidunt, quis scelerisque magna dapibus. Sed eget ipsum vel arcu vehicula ullamcorper.',
-    city: 'Ames, IA',
-    venue: "ISU Library",
-    hostedBy: 'Bob',
-    hostPhotoURL: 'https://randomuser.me/api/portraits/men/20.jpg',
-    attendees: [
-      {
-        id: 'a',
-        name: 'Bob',
-        photoURL: 'https://randomuser.me/api/portraits/men/20.jpg'
-      },
-      {
-        id: 'b',
-        name: 'Tom',
-        photoURL: 'https://randomuser.me/api/portraits/men/22.jpg'
-      }
-    ]
-  },
-  {
-    id: '2',
-    title: 'Chemistry 101 Midterm Exam',
-    date: '2018-03-28',
-    category: 'drinks',
-    description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sollicitudin ligula eu leo tincidunt, quis scelerisque magna dapibus. Sed eget ipsum vel arcu vehicula ullamcorper.',
-    city: 'Ames, IA',
-    venue: 'Pizza Pit',
-    hostedBy: 'Tom',
-    hostPhotoURL: 'https://randomuser.me/api/portraits/men/22.jpg',
-    attendees: [
-      {
-        id: 'b',
-        name: 'Tom',
-        photoURL: 'https://randomuser.me/api/portraits/men/22.jpg'
-      },
-      {
-        id: 'a',
-        name: 'Bob',
-        photoURL: 'https://randomuser.me/api/portraits/men/20.jpg'
-      }
-    ]
-  }
-];
+const mapState = state => ({
+  isOpen: state.isOpen,
+  subjects: state.subjects,
+  loading: state.async.loading
+});
+
+const actions = {
+  deleteSubject
+};
 
 class SubjectDashboard extends Component {
-  state = {
-    subjects: subjectsDashboard,
-    isOpen: false,
-    selectedSubject: null
-  };
 
   handleFormOpen = () => {
     this.setState({
@@ -114,11 +71,13 @@ class SubjectDashboard extends Component {
   }
 
   render() {
-    const {selectedSubject} = this.state;
+    const {isOpen, subjects, loading} = this.props;
+    if (loading) return <LoadingComponent inverted={true}/>
+
     return (
       <Grid>
         <Grid.Column width={10}>
-          <SubjectList deleteSubject={this.handleDeleteSubject} subjects={this.state.subjects} onSubjectOpen={this.handleReadSubject}/>
+          <SubjectList deleteSubject={this.handleDeleteSubject} subjects={subjects} onSubjectOpen={this.handleReadSubject}/>
         </Grid.Column>
         <Grid.Column width={6}>
           <Button
@@ -126,8 +85,8 @@ class SubjectDashboard extends Component {
             positive
             content="Create Subject"
           />
-          {this.state.isOpen && <SubjectForm 
-            selectedSubject={selectedSubject} 
+          {isOpen && <SubjectForm 
+            selectedSubject={subjects} 
             handleCancel={this.handleCancel} 
             createSubject={this.handleCreateSubject} 
             updateSubject={this.handleUpdateSubject} 
@@ -139,4 +98,4 @@ class SubjectDashboard extends Component {
   }
 }
 
-export default SubjectDashboard;
+export default connect(mapState, actions)(SubjectDashboard);

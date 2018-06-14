@@ -3,9 +3,11 @@ import { Grid } from "semantic-ui-react";
 import { connect } from "react-redux";
 import { deleteSession } from "../sessionActions";
 import SessionList from "../SessionList/SessionList";
+import LoadingComponent from '../../../app/layout/LoadingComponent'
 
 const mapState = state => ({
-  sessions: state.sessions
+  sessions: state.sessions,
+  loading: state.async.loading
 });
 
 const actions = {
@@ -18,7 +20,8 @@ class SessionDashboard extends Component {
   };
 
   render() {
-    const { sessions } = this.props;
+    const { sessions, loading } = this.props;
+    if (loading) return <LoadingComponent inverted={true}/>
     return (
       <Grid>
         <Grid.Column width={10}>

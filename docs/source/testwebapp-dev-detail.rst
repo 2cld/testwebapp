@@ -972,8 +972,7 @@ The Google-Maps-Inetgration Step-06 intent is to blahblahblah.
     #. Test the google-map-react_ component in testarea
     #. Create src/features/session/SessionDetail/SessionDetailMap.jsx
     #. In src/features/session/SessionDetail/SessionDetailInfo.jsx change to a statefull component.
-    #. debug...
-    
+
 #. Produce testwebapp-checkpoint-06_ Google-Maps-Inetgration ::
 
     macci:testwebapp cat$ cd ~/bast23/testwebapp/docs
@@ -990,7 +989,77 @@ The Google-Maps-Inetgration Step-06 intent is to blahblahblah.
     
 #. Verify checkpoint testwebapp-checkpoint-06_
 
+Step-07 - testwebapp-checkpoint-07_
+-----------------------------------
 
+The MODAL_MANAGERS_REDUX Step-07 intent is to blahblahblah.
+
+#. Create MODAL_MANAGERS_REDUX for testwebapp-checkpoint-07_
+#. Create src/features/modals/TestModal.jsx
+#. Create src/features/modals/modalConstants.jsx
+#. Create src/features/modals/modalActions.jsx
+#. Create src/features/modals/modalReducer.jsx
+#. Add modalReducer to rootReducer.js in src/app/common/reducers/rootReducer.js
+#. Create src/features/modals/ModalManager.jsx
+#. import ModalManager to src/app/layout/App.jsx and add componet <ModalManager /> into main <div>
+#. Add test button for modal in src/features/testarea/TestComponent.jsx
+#. Create src/features/auth 
+    #. Create src/features/auth/Register/Register.jsx
+    #. Create src/features/auth/Login/Login.jsx
+    #. Create src/features/auth/authActions.jsx
+    #. Create src/features/auth/authConstants.jsx
+    #. Create src/features/auth/authReducer.jsx
+    #. Create src/features/modals/LoginModal.jsx
+    #. Create src/features/modals/RegisterModal.jsx
+#. Add LoginModal and RegisterModal to src/features/modals/ModalManager.jsx
+#. Hook up Login and Register Buttons in src/features/NavBar/NavBar.jsx
+#. Add modal functions to redux using redux-thunk_ into store middleware
+    #. Import redux-thunk into src/app/store/configureStore.jsx
+    #. Test thunk by putting async delay into button onClick funcion in TestComponent.jsx
+    #. Add COUNTER_ACTION_START and COUNTER_ACTION_DONE to testConstants.jsx
+    #. Add Async functions in testActions.jsx
+    #. Swap Async onClick button calls in TestComponent.jsx
+    #. Test (should get delay and loading indication on button)
+#. Fix close modal issues
+    #. in src/features/auth/authActions.jsx add dispatch to multiple functions
+#. Create a general 'async loading' mech (simulate async data access)
+    #. Create src/app/data/sampleData.js
+    #. Put sample data from sessionReducer and subjectReducer into sampleData
+    #. Create src/app/data/mockApi.js to mock the delay an async api call
+    #. Create src/features/async/asyncActions.jsx
+    #. Create src/features/async/asyncConstants.jsx
+    #. Create src/features/async/asyncReducer.jsx
+    #. Add asyncReducer into rootReducer
+#. Call mockApi from sessionActions and subjectActions
+    #. Edit sessionConstants.jsx to bring in fetch
+    #. Edit sessionActions.jsx to add fetchSessions and loadSessions fucntions
+    #. Edit sessionReducer.jsx to add fetchSessions to reducer
+    #. Edit subjectConstants.jsx to bring in fetch
+    #. Edit subjectActions.jsx to add fetchSubjects and loadSubjects fucntions
+    #. Edit subjectReducer.jsx to add fetchSubjects to reducer
+#. Call loadSessions and loadSubjects from index.js
+#. Add loading indication...
+    #. Add /src/app/layout/LoadingComponent.jsx
+    #. call LoadingComponet from SessionDashboard.jsx
+    #. call LoadingComponet from SubjectDashboard.jsx
+    #. Had to clean up some issues with SubjectDashboard.jsx
+#. Test... refresh we should get a loading overlay
+
+#. Produce testwebapp-checkpoint-07_ MODAL_MANAGERS_REDUX ::
+
+    macci:testwebapp cat$ cd ~/bast23/testwebapp/docs
+    macci:docs cat$ vi source/testwebapp-dev-detail.rst (update doc)
+    macci:docs cat$ vi source/conf.py (Bump minor version to X.X.NN to match checkpoint-07)
+    macci:docs cat$ make html 
+    macci:docs cat$ open build/html/index.html (verify docs)
+    macci:testwebapp cat$ cd ~/bast23/testwebapp
+    macci:testwebapp cat$ git add *
+    macci:testwebapp cat$ git commit -m "commit for testwebapp-checkpoint-07 - MODAL_MANAGERS_REDUX"
+    macci:testwebapp cat$ git tag testwebapp-checkpoint-07
+    macci:testwebapp cat$ git push
+    macci:testwebapp cat$ git push origin testwebapp-checkpoint-07
+    
+#. Verify checkpoint testwebapp-checkpoint-07_
 
 Step Template
 =============
@@ -1062,6 +1131,7 @@ Resources
 
 .. _react-devtools-chrome: https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi/related?hl=en
 .. _redux-devtools-chrome: https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd?hl=en
+.. _redux-thunk: https://www.npmjs.com/package/redux-thunk
 
 .. _react-places-autocomplete: https://github.com/kenny-hibino/react-places-autocomplete
 .. _css-sematic-ui: https://semantic-ui.com/
