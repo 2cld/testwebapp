@@ -1,6 +1,7 @@
 import React from 'react';
 import { Segment, Image, Item, Header, Button } from 'semantic-ui-react';
 import { Link } from 'react-router-dom'
+import format from 'date-fns/format';
 
 const sessionImageStyle = {
     filter: 'brightness(30%)'
@@ -30,7 +31,7 @@ const SessionDetailHeader = ({session}) => {
                   content={session.title}
                   style={{ color: 'white' }}
                 />
-                <p>{session.date}</p>
+                <p>{format(session.date, 'dddd Do MMMM')}</p>
                 <p>
                   Hosted by <strong>{session.hostedBy}</strong>
                 </p>

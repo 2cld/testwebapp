@@ -1,11 +1,18 @@
 import React, { Component } from 'react';
 import { Segment, Grid, Icon, Button } from 'semantic-ui-react';
 import SessionDetailMap from './SessionDetailMap'
+import format from 'date-fns/format';
 
 /*const SessionDetailInfo = ({session}) => { */
 class SessionDetailInfo extends Component {
   state = {
     showMap: false
+  }
+
+  componentWillUnmount() {
+    this.setState({
+        showMap: false
+    })
   }
 
   showMapToggle = () => {
@@ -34,7 +41,7 @@ class SessionDetailInfo extends Component {
               <Icon name="calendar" size="large" color="teal" />
             </Grid.Column>
             <Grid.Column width={15}>
-              <span>{session.date}</span>
+              <span>{format(session.date, 'dddd Do MMM')} at {format(session.date, 'h:mm A')}</span>
             </Grid.Column>
           </Grid>
         </Segment>

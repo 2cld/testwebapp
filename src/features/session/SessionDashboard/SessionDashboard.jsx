@@ -3,7 +3,8 @@ import { Grid } from "semantic-ui-react";
 import { connect } from "react-redux";
 import { deleteSession } from "../sessionActions";
 import SessionList from "../SessionList/SessionList";
-import LoadingComponent from '../../../app/layout/LoadingComponent'
+import LoadingComponent from '../../../app/layout/LoadingComponent';
+import SessionActivity from "../SessionActivity/SessionActivity";
 
 const mapState = state => ({
   sessions: state.sessions,
@@ -31,6 +32,7 @@ class SessionDashboard extends Component {
           />
         </Grid.Column>
         <Grid.Column width={6}>
+          <SessionActivity/>
         </Grid.Column>
       </Grid>
     );

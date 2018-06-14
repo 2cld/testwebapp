@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Segment, Item, Icon, List, Button } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
+import format from 'date-fns/format';
 import SessionListAttendee from './SessionListAttendee'
 
 class SessionListItem extends Component {
@@ -23,7 +24,7 @@ class SessionListItem extends Component {
         </Segment>
         <Segment>
           <span>
-            <Icon name="clock" /> {session.date}|
+          <Icon name="clock" /> {format(session.date, 'dddd Do MMMM')} at {format(session.date, 'HH:mm')}|
             <Icon name="marker" /> {session.venue}
           </span>
         </Segment>

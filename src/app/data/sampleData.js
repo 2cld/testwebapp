@@ -3,7 +3,7 @@ const sampleData = {
         {
           id: "1",
           title: "Physics 223 prep for Midterm",
-          date: "2018-03-27",
+          date: "2018-03-27T18:00:00",
           category: "physics",
           description:
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sollicitudin ligula eu leo tincidunt, quis scelerisque magna dapibus. Sed eget ipsum vel arcu vehicula ullamcorper.",
@@ -31,7 +31,7 @@ const sampleData = {
         {
           id: "2",
           title: "Chemistry 101 Midterm Exam",
-          date: "2018-03-28",
+          date: "2018-03-28T18:00:00",
           category: "chemistry",
           description:
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sollicitudin ligula eu leo tincidunt, quis scelerisque magna dapibus. Sed eget ipsum vel arcu vehicula ullamcorper.",
@@ -61,7 +61,7 @@ const sampleData = {
         {
             id: "1",
             title: "Physics 223 prep for Midterm SubjectTest",
-            date: "2018-03-27",
+            date: "2018-03-27T18:00:00",
             category: "physics",
             description:
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sollicitudin ligula eu leo tincidunt, quis scelerisque magna dapibus. Sed eget ipsum vel arcu vehicula ullamcorper.",
@@ -85,7 +85,7 @@ const sampleData = {
         {
             id: "2",
             title: "Chemistry 101 Midterm Exam",
-            date: "2018-03-28",
+            date: "2018-03-28T18:00:00",
             category: "chemistry",
             description:
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sollicitudin ligula eu leo tincidunt, quis scelerisque magna dapibus. Sed eget ipsum vel arcu vehicula ullamcorper.",

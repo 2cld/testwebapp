@@ -1061,6 +1061,77 @@ The MODAL_MANAGERS_REDUX Step-07 intent is to blahblahblah.
     
 #. Verify checkpoint testwebapp-checkpoint-07_
 
+Step-08 - testwebapp-checkpoint-08_
+-----------------------------------
+
+The TOASTER_UICLEANUP Step-08 intent is to add toastr notifications and general cleanup before firebase is hookedup.
+
+#. Create TOASTER_UICLEANUP for testwebapp-checkpoint-08_
+#. Add react-redux-toastr_ to rootReducer.jsx
+#. Add react-redux-toastr_ css and UI to index.js so it's avalible everywhere
+    #. import ReduxToastr from "react-redux-toastr";
+    #. import 'react-redux-toastr/lib/css/react-redux-toastr.min.css';
+    #. Add UI::
+
+        let render = () => {
+            ReactDOM.render(
+                <Provider store={store}>
+                <BrowserRouter>
+                    <ScrollToTop>
+                    <ReduxToastr
+                        position='bottom-right'
+                        transitionIn='fadeIn'
+                        transitionOut='fadeOut'
+                    />          
+                    <App />
+                    </ScrollToTop>
+                </BrowserRouter>
+                </Provider>,
+                rootEl
+            );
+        };
+
+    #. Add toast to sessionActions.jsx
+        #. import { toastr } from 'react-redux-toastr';
+        #. in createSession add a async dispatch then call the toastr.success
+    #. Going to hold off on doing things with subjectActions as I may want that flow differnt
+#. Fix DatePicker data fields
+    #. import date-fns_ to SessionListItem.jsx and use in UI
+    #. import date-fns_ to SessionDetailHeader.jsx and use in UI
+    #. import date-fns_ to SessionDetailInfo.jsx and use in UI
+#. Create a SessionActivity componet (to track recent session upates)
+    #. Create src/features/session/SessionActivity/SessionActivity.jsx SessionActivity component
+    #. Attach SessionActivity to UI in SessionDashboard.jsx
+#. In EventDetailedInfo close map with componentWillUnmount 
+    #. So we don't have multiple google-map error below::
+
+        You have included the Google Maps JavaScript API multiple times on this page. This may cause unexpected errors.
+    
+    #. In EventDetailedInfo.jsx add::
+
+        componentWillUnmount() {
+            this.setState({
+                showMap: false
+            })
+        }
+
+#. Browse around looking for console errors and issues.
+#. Produce testwebapp-checkpoint-08_ TOASTER_UICLEANUP ::
+
+    macci:testwebapp cat$ cd ~/bast23/testwebapp/docs
+    macci:docs cat$ vi source/testwebapp-dev-detail.rst (update doc)
+    macci:docs cat$ vi source/conf.py (Bump minor version to X.X.NN to match checkpoint-08)
+    macci:docs cat$ make html 
+    macci:docs cat$ open build/html/index.html (verify docs)
+    macci:testwebapp cat$ cd ~/bast23/testwebapp
+    macci:testwebapp cat$ git add *
+    macci:testwebapp cat$ git commit -m "commit for testwebapp-checkpoint-08 - TOASTER_UICLEANUP"
+    macci:testwebapp cat$ git tag testwebapp-checkpoint-08
+    macci:testwebapp cat$ git push
+    macci:testwebapp cat$ git push origin testwebapp-checkpoint-08
+    
+#. Verify checkpoint testwebapp-checkpoint-08_
+
 Step Template
 =============
 
@@ -1112,6 +1183,7 @@ Resources
 #. firebase-testwebapp-Storage-Files_
 #. firebase-docs-database-query_
 #. google-map-react_
+#. date-fns_
 #. youtube-FlutterWireUpFirebaseAuthiOS_
 #. Testflight documentation ios-docs-testflight_
 #. Testflight Tutorial youtube-ios-tutorial-testflight-1_
@@ -1135,6 +1207,10 @@ Resources
 
 .. _react-places-autocomplete: https://github.com/kenny-hibino/react-places-autocomplete
 .. _css-sematic-ui: https://semantic-ui.com/
+
+.. _react-redux-toastr: https://www.npmjs.com/package/react-redux-toastr
+
+.. _date-fns: https://date-fns.org
 
 .. _google-api-console: https://console.cloud.google.com/apis?pli=1
 .. _google-map-react: https://github.com/google-map-react/google-map-react
