@@ -24,13 +24,13 @@ class SessionListItem extends Component {
         </Segment>
         <Segment>
           <span>
-          <Icon name="clock" /> {format(session.date, 'dddd Do MMMM')} at {format(session.date, 'HH:mm')}|
+          <Icon name="clock" /> {format(session.date.toDate(), 'dddd Do MMMM')} at {format(session.date.toDate(), 'HH:mm')}|
             <Icon name="marker" /> {session.venue}
           </span>
         </Segment>
         <Segment secondary>
           <List horizontal>
-          {session.attendees && session.attendees.map((attendee) => (
+          {session.attendees && Object.values(session.attendees).map((attendee) => (
             <SessionListAttendee key={attendee.id} attendee={attendee}/>
           ))}
           </List>

@@ -1132,6 +1132,82 @@ The TOASTER_UICLEANUP Step-08 intent is to add toastr notifications and general 
     
 #. Verify checkpoint testwebapp-checkpoint-08_
 
+Step-09 - testwebapp-checkpoint-09_
+-----------------------------------
+
+The FIRESTORE_SETUP Step-09 intent is to add react-redux-firebase.
+
+#. Create FIRESTORE_SETUP for testwebapp-checkpoint-09_
+#. Go to firebase-console_
+#. Add project testwebapp (if it does not exist)
+    #. Add firebase to webapp
+#. Go to Firebase testwebapp console firebase-testwebapp-console_
+#. Create src/app/config/firebase.js and add conifg info from Add another app - webapp
+#. Edit src/app/store/configureStore.js::
+
+    import { createStore, applyMiddleware } from 'redux';
+    import { composeWithDevTools } from 'redux-devtools-extension';
+    import { reactReduxFirebase, getFirebase } from 'react-redux-firebase';
+    import { reduxFirestore, getFirestore } from 'redux-firestore';
+    import thunk from 'redux-thunk';
+    import rootReducer from '../reducers/rootReducer';
+    import firebase from '../config/firebase';
+
+    const rrfConfig = {
+    userProfile: 'users',
+    attachAuthIsReady: true,
+    useFirestoreForProfile: true
+    };
+
+    export const configureStore = preloadedState => {
+    const middlewares = [thunk.withExtraArgument({ getFirebase, getFirestore })];
+    const middlewareEnhancer = applyMiddleware(...middlewares);
+    const storeEnhancers = [middlewareEnhancer];
+    const composedEnhancer = composeWithDevTools(
+        ...storeEnhancers,
+        reactReduxFirebase(firebase, rrfConfig),
+        reduxFirestore(firebase)
+    );
+    const store = createStore(rootReducer, preloadedState, composedEnhancer);
+    if (process.env.NODE_ENV !== 'production') {
+        if (module.hot) {
+        module.hot.accept('../reducers/rootReducer', () => {
+            const newRootReducer = require('../reducers/rootReducer').default;
+            store.replaceReducer(newRootReducer);
+        });
+        }
+    }
+    return store;
+    };
+
+#. Edit rootReducer.js to import firebaseReducer and firestoreReducer
+#. Goto firebase-testwebapp-Database_ and put test data into sessions doc
+#. Edit index.js comment out loadSessions
+#. Edit SessionsDashboard.jsx connect to firestore
+#. Edit SessionList.jsx to check that session data exist before using
+#. Edit SessionListItem.jsx to get values out of the object before map is called
+#. Now we should see the session info we put in firestore
+#. Fix timestamp date issues (change firebase.js timestamp)
+#. Fix session.date.toDate() in SessionListItem.jsx
+
+#. Produce testwebapp-checkpoint-09_ FIRESTORE_SETUP ::
+
+    macci:testwebapp cat$ cd ~/bast23/testwebapp/docs
+    macci:docs cat$ vi source/testwebapp-dev-detail.rst (update doc)
+    macci:docs cat$ vi source/conf.py (Bump minor version to X.X.NN to match checkpoint-09)
+    macci:docs cat$ make html 
+    macci:docs cat$ open build/html/index.html (verify docs)
+    macci:testwebapp cat$ cd ~/bast23/testwebapp
+    macci:testwebapp cat$ git add *
+    macci:testwebapp cat$ git commit -m "commit for testwebapp-checkpoint-09 - FIRESTORE_SETUP"
+    macci:testwebapp cat$ git tag testwebapp-checkpoint-09
+    macci:testwebapp cat$ git push
+    macci:testwebapp cat$ git push origin testwebapp-checkpoint-09
+    
+#. Verify checkpoint testwebapp-checkpoint-09_
+
+
+
 Step Template
 =============
 

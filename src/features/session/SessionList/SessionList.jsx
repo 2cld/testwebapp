@@ -7,7 +7,7 @@ class SessionList extends Component {
     return (
       <div>
         <h1>Session List</h1>
-        {sessions.map((session) => (
+        {sessions && sessions.map((session) => (
           <SessionListItem 
             key={session.id} 
             session={session} 
