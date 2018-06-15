@@ -1206,6 +1206,39 @@ The FIRESTORE_SETUP Step-09 intent is to add react-redux-firebase.
     
 #. Verify checkpoint testwebapp-checkpoint-09_
 
+Step-10 - testwebapp-checkpoint-10_
+-----------------------------------
+
+The FIREBASE_LOGIN Step-10 intent is to use firebase login to auth a user.
+
+#. Create FIREBASE_LOGIN for testwebapp-checkpoint-10_
+#. Go to firebase-testwebapp-Authentication_ enable Email/Password option.
+#. Go to Users and add a user
+#. Edit src/features/auth/authActions.jsx and add getFirebase methods
+#. Edit src/features/auth/Login/LoginForm.jsx and add error display
+#. Edit src/features/nav/NavBar/NavBar.jsx to display login info
+#. Edit src/features/nav/Menus/SignedInMenu.jsx to display login info
+#. Create User Register in authActions.jsx
+#. Hook up ResgisterForm.jsx
+#. Create src/features/auth/SocialLogin/SocialLogin.jsx
+#. Hook up SocailLogin to UI
+#. Lots of hacking that I did not track... having issues with google I think
+#. Got email logins working just comment out the socail stuff for now
+#. Produce testwebapp-checkpoint-10_ FIREBASE_LOGIN ::
+
+    macci:testwebapp cat$ cd ~/bast23/testwebapp/docs
+    macci:docs cat$ vi source/testwebapp-dev-detail.rst (update doc)
+    macci:docs cat$ vi source/conf.py (Bump minor version to X.X.NN to match checkpoint-10)
+    macci:docs cat$ make html 
+    macci:docs cat$ open build/html/index.html (verify docs)
+    macci:testwebapp cat$ cd ~/bast23/testwebapp
+    macci:testwebapp cat$ git add *
+    macci:testwebapp cat$ git commit -m "commit for testwebapp-checkpoint-10 - FIREBASE_LOGIN"
+    macci:testwebapp cat$ git tag testwebapp-checkpoint-10
+    macci:testwebapp cat$ git push
+    macci:testwebapp cat$ git push origin testwebapp-checkpoint-10
+    
+#. Verify checkpoint testwebapp-checkpoint-10_
 
 
 Step Template
