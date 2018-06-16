@@ -1240,6 +1240,47 @@ The FIREBASE_LOGIN Step-10 intent is to use firebase login to auth a user.
     
 #. Verify checkpoint testwebapp-checkpoint-10_
 
+Step-11 - testwebapp-checkpoint-11_
+-----------------------------------
+
+The USER_SETTINGS Step-11 intent is to setup user profile pages and options.
+
+#. Create USER_SETTINGS for testwebapp-checkpoint-11_
+#. User Settings - BasicPage
+    #. Edit src/features/user/Settings/BasicPage.jsx
+    #. Create RadioInput.jsx in src/app/common/form
+    #. Edit SettingsDashboard.jsx to pass userinfo into BasicPage.jsx
+    #. Create userActions.jsx in /src/features/user/
+        #. These ACTIONS are just functions that are already in firebase (no reducer needed)
+    #. Hook updateProfile function form userActions.jsx to BasicPage.jsx through SettingsDashboard.jsx
+    #. Test... Fix Stuff (Date crap issues)
+#. User Settings - AboutPage
+    #. Edit src/features/user/Settings/AboutPage.jsx
+    #. Edit SettingsDashboard.jsx to pass userinfo into AboutPage.jsx
+#. User Settings - PhotosPage
+    #. Edit src/features/user/Settings/PhotosPage.jsx
+    #. Edit SettingsDashboard.jsx to pass userinfo into PhotosPage.jsx
+    #. Use react-dropzone_ for photo upload
+    #. Lots of f'n around with UI and libs...
+#. User Settings - AboutPage
+    #. Pass auth to SignedInMenu via NavBar
+    #. Lots of parts... edit then page does not refresh, but logging out and back in fixes...
+
+#. Produce testwebapp-checkpoint-11_ USER_SETTINGS ::
+
+    macci:testwebapp cat$ cd ~/bast23/testwebapp/docs
+    macci:docs cat$ vi source/testwebapp-dev-detail.rst (update doc)
+    macci:docs cat$ vi source/conf.py (Bump minor version to X.X.NN to match checkpoint-11)
+    macci:docs cat$ make html 
+    macci:docs cat$ open build/html/index.html (verify docs)
+    macci:testwebapp cat$ cd ~/bast23/testwebapp
+    macci:testwebapp cat$ git add *
+    macci:testwebapp cat$ git commit -m "commit for testwebapp-checkpoint-11 - USER_SETTINGS"
+    macci:testwebapp cat$ git tag testwebapp-checkpoint-11
+    macci:testwebapp cat$ git push
+    macci:testwebapp cat$ git push origin testwebapp-checkpoint-11
+    
+#. Verify checkpoint testwebapp-checkpoint-11_
 
 Step Template
 =============
@@ -1318,7 +1359,7 @@ Resources
 .. _css-sematic-ui: https://semantic-ui.com/
 
 .. _react-redux-toastr: https://www.npmjs.com/package/react-redux-toastr
-
+.. _react-dropzone: https://github.com/react-dropzone/react-dropzone
 .. _date-fns: https://date-fns.org
 
 .. _google-api-console: https://console.cloud.google.com/apis?pli=1

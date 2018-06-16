@@ -10,7 +10,7 @@ import SessionDashboard from "../../features/session/SessionDashboard/SessionDas
 import SessionDetailPage from "../../features/session/SessionDetail/SessionDetailPage";
 import SessionForm from "../../features/session/SessionForm/SessionForm";
 import PeopleDashboard from "../../features/user/PeopleDashboard/PeopleDashboard";
-import UserDetailPage from "../../features/user/UserDetail/UserDetailPage";
+import UserDetailedPage from "../../features/user/UserDetailed/UserDetailedPage";
 import SettingsDashboard from "../../features/user/Settings/SettingsDashboard";
 import TestComponent from "../../features/testarea/TestComponent";
 import ModalManager from "../../features/modals/ModalManager";
@@ -37,7 +37,7 @@ class App extends Component {
                 <Route path="/manage/:id" component={SessionForm} />
                 <Route path="/createSession" component={SessionForm} />
                 <Route path="/people" component={PeopleDashboard} />
-                <Route path="/profile/:id" component={UserDetailPage} />
+                <Route path="/profile/:id" component={UserDetailedPage} />
                 <Route path="/settings" component={SettingsDashboard} />
                 <Route path="/test" component={TestComponent} />
               </Container>
