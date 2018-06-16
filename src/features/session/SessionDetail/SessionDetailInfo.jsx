@@ -23,6 +23,10 @@ class SessionDetailInfo extends Component {
 
   render() {
     const { session } = this.props;
+    let sessionDate;
+    if (session.date) {
+      sessionDate = session.date.toDate();
+    }
     return (
       <Segment.Group>
         <Segment attached="top">
@@ -41,7 +45,7 @@ class SessionDetailInfo extends Component {
               <Icon name="calendar" size="large" color="teal" />
             </Grid.Column>
             <Grid.Column width={15}>
-              <span>{format(session.date, 'dddd Do MMM')} at {format(session.date, 'h:mm A')}</span>
+              <span>{format(sessionDate, 'dddd Do MMM')} at {format(sessionDate, 'h:mm A')}</span>
             </Grid.Column>
           </Grid>
         </Segment>

@@ -1,7 +1,9 @@
 import moment from 'moment';
 import { toastr } from 'react-redux-toastr';
 import cuid from 'cuid';
-import { asyncActionError, asyncActionStart, asyncActionFinish } from '../async/asyncActions'
+import { asyncActionError, asyncActionStart, asyncActionFinish } from '../async/asyncActions';
+import firebase from '../../app/config/firebase';
+import { FETCH_SESSIONS } from '../session/sessionConstants';
 
 export const updateProfile = user => async (
   dispatch,
@@ -85,7 +87,7 @@ export const deletePhoto = (photo) =>
       console.log(error);
       throw new Error('Problem deleting the photo')
     }
-  }
+  };
 
 export const setMainPhoto = photo =>
   async (dispatch, getState, {getFirebase}) => {
@@ -98,5 +100,96 @@ export const setMainPhoto = photo =>
       console.log(error);
       throw new Error('Problem setting main photo')
     }
-  }
+  };
+
+  export const goingToSession = (session) => 
+  async (dispatch, getState, {getFirestore}) => {
+    const firestore = getFirestore();
+    const user = firestore.auth().currentUser;
+    const photoURL = getState().firebase.profile.photoURL;
+    const attendee = {
+      going: true,
+      joinDate: Date.now(),
+      photoURL: photoURL || '/assets/user.png',
+      displayName: user.displayName,
+      host: false
+    }
+    try {
+      await firestore.update(`sessions/${session.id}`, {
+        [`attendees.${user.uid}`]: attendee
+      })
+      await firestore.set(`session_attendee/${session.id}_${user.uid}`, {
+        sessionId: session.id,
+        userUid: user.uid,
+        sessionDate: session.date,
+        host: false
+      })
+      toastr.success('Success', 'You have signed up to the session');
+    } catch (error) {
+      console.log(error);
+      toastr.error('Oops', 'Problem signing up to session')
+    }
+  };
+
+export const cancelGoingToSession = (session) => 
+  async (dispatch, getState, {getFirestore}) => {
+    const firestore = getFirestore();
+    const user = firestore.auth().currentUser;
+    try {
+      await firestore.update(`sessions/${session.id}`, {
+        [`attendees.${user.uid}`]: firestore.FieldValue.delete()
+      })
+      await firestore.delete(`session_attendee/${session.id}_${user.uid}`);
+      toastr.success('Success', 'You have removed yourself from the session');
+    } catch (error) {
+      console.log(error)
+      toastr.error('Oops', 'something went wrong')
+    }
+  };
+
+  export const getUserSessions = (userUid, activeTab) => async (dispatch, getState) => {
+    dispatch(asyncActionStart());
+    const firestore = firebase.firestore();
+    const today = new Date(Date.now());
+    let sessionsRef = firestore.collection('session_attendee');
+    let query;
+    switch (activeTab) {
+      case 1: // past sessions
+        query = sessionsRef
+          .where('userUid', '==', userUid)
+          .where('sessionDate', '<=', today)
+          .orderBy('sessionDate', 'desc');
+        break;
+      case 2: // future sessions
+        query = sessionsRef
+          .where('userUid', '==', userUid)
+          .where('sessionDate', '>=', today)
+          .orderBy('sessionDate');
+        break;
+      case 3: // hosted sessions
+        query = sessionsRef
+          .where('userUid', '==', userUid)
+          .where('host', '==', true)
+          .orderBy('sessionDate', 'desc');
+        break;
+      default:
+        query = sessionsRef.where('userUid', '==', userUid).orderBy('sessionDate', 'desc');
+    }
+    try {
+      let querySnap = await query.get();
+      let sessions = [];
+  
+      for (let i=0; i<querySnap.docs.length; i++) {
+        let evt = await firestore.collection('sessions').doc(querySnap.docs[i].data().sessionId).get();
+        sessions.push({...evt.data(), id: evt.id})
+      }
+  
+      dispatch({type: FETCH_SESSIONS, payload: {sessions}})
+      
+      dispatch(asyncActionFinish());
+    } catch (error) {
+      console.log(error);
+      dispatch(asyncActionError());
+    }
+  };
   

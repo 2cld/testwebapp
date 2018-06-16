@@ -23,21 +23,35 @@ const AboutPage = ({ pristine, submitting, handleSubmit, updateProfile }) => {
       <p>Complete your profile to get the most out of this site</p>
       <Form onSubmit={handleSubmit(updateProfile)}>
         <Form.Group inline>
-          <label>Tell us your status: </label>
-          <Field name="status" component={RadioInput} type="radio" value="single" label="Single" />
+          <label>Your GooberU status: </label>
+          <Field name="status" component={RadioInput} type="radio" value="freshman" label="Freshman" />
           <Field
             name="status"
             component={RadioInput}
             type="radio"
-            value="relationship"
-            label="Relationship"
+            value="sophomore"
+            label="Sophomore"
           />
           <Field
             name="status"
             component={RadioInput}
             type="radio"
-            value="married"
-            label="Married"
+            value="junior"
+            label="Junior"
+          />
+          <Field
+            name="status"
+            component={RadioInput}
+            type="radio"
+            value="senior"
+            label="Senior"
+          />
+         <Field
+            name="status"
+            component={RadioInput}
+            type="radio"
+            value="postgrad"
+            label="Post Graduate"
           />
         </Form.Group>
         <Divider />

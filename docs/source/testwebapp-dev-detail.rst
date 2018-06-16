@@ -1282,6 +1282,60 @@ The USER_SETTINGS Step-11 intent is to setup user profile pages and options.
     
 #. Verify checkpoint testwebapp-checkpoint-11_
 
+Step-12 - testwebapp-checkpoint-12_
+-----------------------------------
+
+The SESSIONS_FIRESTORE Step-12 intent is to put sessions transactional data flow into firestore.
+
+#. Create SESSIONS_FIRESTORE for testwebapp-checkpoint-12_
+#. Update createSession method in sessionActions.jsx
+#. Create createNewSession in src/app/common/util/helpers.js
+#. Hook to form SessionForm.jsx
+#. Cleanup SessionDetailPage.jsx and convert class componet and put in lifecycle components to deal with data
+#. Woops... ended up jumping around and fixing stuff... simple stupid error as I was converting but did not document
+#. LazyLoad
+    #. Edit UserDetailedPhotos.jsx
+    #. Put photos inside LazyLoad component
+#. Cleanup Datastuff
+    #. Go to SessionDashboard.jsx and comment out isEmpty if (line 25) so you can clear out session documents
+    #. Goto firebase-testwebapp-Authentication_ and clean-up users
+    #. Goto firebase-testwebapp-Database_ and clean up users, sessions, session_attendee
+#. Create data for testing
+    #. Create 4 users and profiles via different browsers
+        #. test@test.com - testme (Test)
+        #. cy@test.com - testme (ISU)
+        #. tree@test.com - testme (Stanford)
+        #. tc@test.com - testme (UNI)
+    #. Each user creates 3 sessions (as host / GooberU by)
+    #. Each user signup to attend 2 other sessions
+#. Filter paging Sessions
+    #. In sessionActions.js create getEventsForDashboard
+    #. Edit SessionDashboard.jsx to use filtering and paging
+    #. fetch more pages
+#. Infinite Scroll 
+    #. Edit SessionList.jsx import InfiniteScroll from 'react-infinite-scroller'
+    #. Add InfiniteScroll component around EventListItem
+#. Add more filtering and compound queries for user management
+    #. Edit userActions.jsx add getUserSessions function 
+    #. Hook up to UserDetailedPage
+    #. The queries will require indexes which will be auto generated via a link in the console
+#. Test stuff...
+#. Produce testwebapp-checkpoint-12_ SESSIONS_FIRESTORE ::
+
+    macci:testwebapp cat$ cd ~/bast23/testwebapp/docs
+    macci:docs cat$ vi source/testwebapp-dev-detail.rst (update doc)
+    macci:docs cat$ vi source/conf.py (Bump minor version to X.X.NN to match checkpoint-12)
+    macci:docs cat$ make html 
+    macci:docs cat$ open build/html/index.html (verify docs)
+    macci:testwebapp cat$ cd ~/bast23/testwebapp
+    macci:testwebapp cat$ git add *
+    macci:testwebapp cat$ git commit -m "commit for testwebapp-checkpoint-12 - SESSIONS_FIRESTORE"
+    macci:testwebapp cat$ git tag testwebapp-checkpoint-12
+    macci:testwebapp cat$ git push
+    macci:testwebapp cat$ git push origin testwebapp-checkpoint-12
+    
+#. Verify checkpoint testwebapp-checkpoint-12_
+
 Step Template
 =============
 

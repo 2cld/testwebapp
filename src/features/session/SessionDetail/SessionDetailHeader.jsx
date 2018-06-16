@@ -16,7 +16,11 @@ const sessionImageTextStyle = {
     color: 'white'
 };
 
-const SessionDetailHeader = ({session}) => {
+const SessionDetailHeader = ({session, isHost, isGoing, goingToSession, cancelGoingToSession}) => {
+  let sessionDate;
+  if (session.date) {
+    sessionDate = session.date.toDate();
+  }
   return (
     <Segment.Group>
       <Segment basic attached="top" style={{ padding: '0' }}>
@@ -31,7 +35,7 @@ const SessionDetailHeader = ({session}) => {
                   content={session.title}
                   style={{ color: 'white' }}
                 />
-                <p>{format(session.date, 'dddd Do MMMM')}</p>
+                <p>{format(sessionDate, 'dddd Do MMMM')}</p>
                 <p>
                   Hosted by <strong>{session.hostedBy}</strong>
                 </p>
@@ -41,13 +45,21 @@ const SessionDetailHeader = ({session}) => {
         </Segment>
       </Segment>
 
-      <Segment attached="bottom">
-        <Button>Cancel My Place</Button>
-        <Button color="teal">JOIN THIS session</Button>
-
+      <Segment attached="bottom" >
+        {!isHost && (
+          <div>
+            {isGoing ? (
+              <Button onClick={() => cancelGoingToSession(session)}>Cancel My Place</Button>
+            ) : (
+              <Button onClick={() => goingToSession(session)} color="teal">JOIN THIS EVENT</Button>
+            )}
+          </div>
+        )}
+        {isHost && (
         <Button as={Link} to={`/manage/${session.id}`} color="orange" floated="right">
-          Manage session
+          Manage GooberU Session
         </Button>
+        )}
       </Segment>
     </Segment.Group>
   );
