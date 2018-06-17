@@ -1348,7 +1348,7 @@ The SESSION_CHAT Step-13 intent is to create structure for session chat system.
 #. Edit SessionDetailChat.jsx to accept chat data
 #. Create SessionDetailChatForm.jsx to create SessionDetailChatForm componet
 #. git commit before I clean up code
-
+#. Cleanup lots (59 files?) mostly just comments
 #. Produce testwebapp-checkpoint-13_ SESSION_CHAT ::
 
     macci:testwebapp cat$ cd ~/bast23/testwebapp/docs
@@ -1482,6 +1482,9 @@ Resources
 .. _testwebapp-checkpoint-10: https://github.com/gooberu/testwebapp/tree/testwebapp-checkpoint-10
 .. _testwebapp-checkpoint-11: https://github.com/gooberu/testwebapp/tree/testwebapp-checkpoint-11
 .. _testwebapp-checkpoint-12: https://github.com/gooberu/testwebapp/tree/testwebapp-checkpoint-12
+.. _testwebapp-checkpoint-13: https://github.com/gooberu/testwebapp/tree/testwebapp-checkpoint-13
+.. _testwebapp-checkpoint-14: https://github.com/gooberu/testwebapp/tree/testwebapp-checkpoint-14
+.. _testwebapp-checkpoint-15: https://github.com/gooberu/testwebapp/tree/testwebapp-checkpoint-15
 
 .. _youtube-FlutterWireUpFirebaseAuthiOS: https://www.youtube.com/watch?v=3nFIMej3Tvw
 .. _youtube-ios-tutorial-testflight-1: https://www.youtube.com/watch?v=1CcCKQHjDpw
