@@ -25,7 +25,7 @@ export const deleteSubject = (state, payload) => {
 
 export const fetchSubjects = (state, payload) => {
   return payload.subjects
-}
+};
 
 export default createReducer(initialState, {
   [CREATE_SUBJECT]: createSubject,

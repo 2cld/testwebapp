@@ -25,7 +25,7 @@ export const deleteSession = (state, payload) => {
 
 export const fetchSessions = (state, payload) => {
   return payload.sessions
-}
+};
 
 export default createReducer(initialState, {
   [CREATE_SESSION]: createSession,

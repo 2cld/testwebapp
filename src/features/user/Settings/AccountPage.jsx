@@ -24,7 +24,6 @@ const validate = combineValidators({
     matchesField('newPassword1')({ message: 'Passwords do not match' })
   )()
 });
-
 const AccountPage = ({
   error,
   invalid,
@@ -77,19 +76,6 @@ const AccountPage = ({
             </Form>
           </div>
         )}
-
-      {/*providerId &&
-        providerId === 'facebook.com' && (
-          <div>
-            <Header color="teal" sub content="Facebook Account" />
-            <p>Please visit Facebook to update your account settings</p>
-            <Button type="button" color="facebook">
-              <Icon name="facebook" />
-              Go to Facebook
-            </Button>
-          </div>
-        )*/}
-
       {providerId &&
         providerId === 'google.com' && (
           <div>

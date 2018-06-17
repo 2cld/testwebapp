@@ -9,14 +9,12 @@ class SessionDetailedChat extends Component {
     showReplyForm: false,
     selectedCommentId: null
   };
-
   handleOpenReplyForm = id => () => {
     this.setState({
       showReplyForm: true,
       selectedCommentId: id
     });
   };
-
   handleCloseReplyForm = () => {
     this.setState({
       selectedCommentId: null,
@@ -32,7 +30,6 @@ class SessionDetailedChat extends Component {
         <Segment textAlign="center" attached="top" inverted color="teal" style={{ border: 'none' }}>
           <Header>Chat about this session</Header>
         </Segment>
-
         <Segment attached>
           <Comment.Group>
             {sessionChat &&
@@ -61,7 +58,6 @@ class SessionDetailedChat extends Component {
                         )}
                     </Comment.Actions>
                   </Comment.Content>
-
                   {comment.childNodes &&
                     comment.childNodes.map(child => (
                       <Comment.Group>
@@ -100,6 +96,6 @@ class SessionDetailedChat extends Component {
       </div>
     );
   }
-}
+};
 
 export default SessionDetailedChat;

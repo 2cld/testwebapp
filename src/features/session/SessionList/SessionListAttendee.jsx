@@ -11,6 +11,6 @@ class SessionListAttendee extends Component {
       </List.Item>
     )
   }
-}
+};
 
 export default SessionListAttendee

@@ -4,7 +4,6 @@ import { Route, Switch } from "react-router-dom";
 import NavBar from "../../features/nav/NavBar/NavBar";
 import HomePage from "../../features/home/HomePage";
 import SubjectDashboard from "../../features/subject/SubjectDashboard/SubjectDashboard";
-//import SubjectDetailPage from "../../features/subject/SubjectDetail/SubjectDetailPage";
 import SubjectForm from "../../features/subject/SubjectForm/SubjectForm";
 import SessionDashboard from "../../features/session/SessionDashboard/SessionDashboard";
 import SessionDetailPage from "../../features/session/SessionDetail/SessionDetailPage";

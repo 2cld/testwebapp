@@ -1,25 +1,10 @@
 import { toastr } from 'react-redux-toastr';
-import { /*CREATE_SESSION,*/ DELETE_SESSION, /* UPDATE_SESSION, */ FETCH_SESSIONS } from './sessionConstants';
+import { DELETE_SESSION, FETCH_SESSIONS } from './sessionConstants';
 import { asyncActionStart, asyncActionFinish, asyncActionError } from '../async/asyncActions';
-// import { fetchSampleData } from '../../app/data/mockApi';
 import { createNewSession } from '../../app/common/util/helpers';
 import moment from 'moment';
 import firebase from '../../app/config/firebase';
 
-/* Old
-export const createSession = (session) => {
-  return async dispatch => {
-    try {
-      dispatch({
-        type: CREATE_SESSION,
-        payload: { session }
-      });
-      toastr.success('Success', 'Session has been created')
-    } catch (error) {
-      toastr.error('Oops', 'Something went wrong')
-    }
-  }
-}; */
 export const createSession = (session) => {
   return async (dispatch, getState, { getFirestore }) => {
     const firestore = getFirestore();
@@ -57,21 +42,6 @@ export const updateSession = (session) => {
     }
   };
 };
-/*
-export const updateSession = (session) => {
-  return async dispatch => {
-    try {
-      dispatch({
-        type: UPDATE_SESSION,
-        payload: { session }
-      });
-      toastr.success('Success', 'Session has been updated')
-    } catch (error) {
-      toastr.error('Oops', 'Something went wrong')
-    }
-  }
-};
-*/
 
 export const deleteSession = (sessionId) => {
   return async dispatch => {
@@ -117,7 +87,6 @@ export const getSessionsForDashboard = lastSession => async (dispatch, getState)
         .doc(lastSession.id)
         .get());
     let query;
-
     lastSession
       ? (query = sessionsRef
           .where('date', '>=', today)
@@ -128,16 +97,12 @@ export const getSessionsForDashboard = lastSession => async (dispatch, getState)
           .where('date', '>=', today)
           .orderBy('date')
           .limit(2));
-    
     let querySnap = await query.get();
-
     if (querySnap.docs.length === 0) {
       dispatch(asyncActionFinish());
       return querySnap;
     }
-
     let sessions = [];
-
     for (let i = 0; i < querySnap.docs.length; i++) {
       let evt = { ...querySnap.docs[i].data(), id: querySnap.docs[i].id };
       sessions.push(evt);
@@ -150,29 +115,6 @@ export const getSessionsForDashboard = lastSession => async (dispatch, getState)
     dispatch(asyncActionError());
   }
 };
-
-/*
-export const fetchSessions = (sessions) => {
-  return {
-    type: FETCH_SESSIONS,
-    payload: sessions
-  }
-};
-
-export const loadSessions = () => {
-  return async dispatch => {
-    try {
-      dispatch(asyncActionStart())
-      let sessions = await fetchSampleData();
-      dispatch(fetchSessions(sessions))
-      dispatch(asyncActionFinish());
-    } catch (error) {
-      console.log(error);
-      dispatch(asyncActionError());
-    }
-  }
-};
-*/
 
 export const addSessionComment = (sessionId, values, parentId) => 
   async (dispatch, getState, {getFirebase}) => {
@@ -194,4 +136,3 @@ export const addSessionComment = (sessionId, values, parentId) =>
       toastr.error('Oops', 'Problem adding comment')
     }
   };
-

@@ -5,33 +5,29 @@ import { connect } from 'react-redux';
 import { deleteSubject } from '../subjectActions';
 import SubjectList from '../SubjectList/SubjectList';
 import SubjectForm from '../SubjectForm/SubjectForm';
-import LoadingComponent from '../../../app/layout/LoadingComponent'
+import LoadingComponent from '../../../app/layout/LoadingComponent';
 
 const mapState = state => ({
   isOpen: state.isOpen,
   subjects: state.subjects,
   loading: state.async.loading
 });
-
 const actions = {
   deleteSubject
 };
 
 class SubjectDashboard extends Component {
-
   handleFormOpen = () => {
     this.setState({
       selectedSubject: null,
       isOpen: true
     });
   };
-
   handleCancel = () => {
     this.setState({
       isOpen: false
     });
   };
-
   handleCreateSubject = (newSubject) => {
     newSubject.id = cuid();
     newSubject.hostPhotoURL = '/assets/user.png';
@@ -40,15 +36,13 @@ class SubjectDashboard extends Component {
       subjects: updatedSubjects,
       isOpen: false
     })
-  }
-
+  };
   handleReadSubject = (readSubject) => () => {
     this.setState({
       selectedSubject: readSubject,
       isOpen: true
     })
-  } 
-
+  };
   handleUpdateSubject = (updatedSubject) => {
     this.setState({
       subjects: this.state.subjects.map(subject => {
@@ -61,14 +55,13 @@ class SubjectDashboard extends Component {
       isOpen: false,
       selectedSubject: null
     })
-  }
-
+  };
   handleDeleteSubject = (subjectId) => () => {
     const updatedSubjects = this.state.subjects.filter(e => e.id !== subjectId);
     this.setState({
       subjects: updatedSubjects
     })
-  }
+  };
 
   render() {
     const {isOpen, subjects, loading} = this.props;
@@ -96,6 +89,6 @@ class SubjectDashboard extends Component {
       </Grid>
     );
   }
-}
+};
 
 export default connect(mapState, actions)(SubjectDashboard);

@@ -28,13 +28,11 @@ const query = ({ auth }) => {
     }
   ];
 };
-
 const actions = {
   uploadProfileImage,
   deletePhoto,
   setMainPhoto
 };
-
 const mapState = state => ({
   auth: state.firebase.auth,
   profile: state.firebase.profile,
@@ -49,14 +47,12 @@ class PhotosPage extends Component {
     cropResult: null,
     image: {}
   };
-
   cancelCrop = () => {
     this.setState({
       files: [],
       image: {}
     });
   };
-
   uploadImage = async () => {
     try {
       await this.props.uploadProfileImage(
@@ -69,28 +65,24 @@ class PhotosPage extends Component {
       toastr.error('Oops', error.message);
     }
   };
-
   handlePhotoDelete = (photo) => async () => {
     try {
       this.props.deletePhoto(photo);
     } catch (error) {
       toastr.error('Oops', error.message)
     }
-  }
-
+  };
   handleSetMainPhoto = (photo) => async () => {
     try {
       this.props.setMainPhoto(photo)
     } catch (error) {
       toastr.error('Oops', error.message)
     }
-  }
-
+  };
   cropImage = () => {
     if (typeof this.refs.cropper.getCroppedCanvas() === 'undefined') {
       return;
     }
-
     this.refs.cropper.getCroppedCanvas().toBlob(blob => {
       let imageUrl = URL.createObjectURL(blob);
       this.setState({
@@ -99,7 +91,6 @@ class PhotosPage extends Component {
       });
     }, 'image/jpeg');
   };
-
   onDrop = files => {
     this.setState({
       files,
@@ -176,10 +167,8 @@ class PhotosPage extends Component {
             )}
           </Grid.Column>
         </Grid>
-
         <Divider />
         <Header sub color="teal" content="All Photos" />
-
         <Card.Group itemsPerRow={5}>
           <Card>
             <Image src={profile.photoURL || '/assets/user.png'} />
@@ -201,7 +190,7 @@ class PhotosPage extends Component {
       </Segment>
     );
   }
-}
+};
 
 export default compose(
   connect(mapState, actions),

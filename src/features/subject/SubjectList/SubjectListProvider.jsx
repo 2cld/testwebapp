@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
-import { List, Image } from 'semantic-ui-react'
+import React, { Component } from 'react';
+import { List, Image } from 'semantic-ui-react';
 
 class SubjectListProvider extends Component {
   render() {
@@ -10,6 +10,6 @@ class SubjectListProvider extends Component {
       </List.Item>
     )
   }
-}
+};
 
-export default SubjectListProvider
+export default SubjectListProvider;

@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 const PeopleDashboard = () => {
   return (
@@ -6,6 +6,6 @@ const PeopleDashboard = () => {
       <h1>PeopleDashboard</h1>
     </div>
   )
-}
+};
 
-export default PeopleDashboard
+export default PeopleDashboard;

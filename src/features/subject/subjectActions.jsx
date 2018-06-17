@@ -9,7 +9,7 @@ export const createSubject = (subject) => {
       subject
     }
   }
-}
+};
 
 export const updateSubject = (subject) => {
   return {
@@ -18,7 +18,7 @@ export const updateSubject = (subject) => {
       subject
     }
   }
-}
+};
 
 export const deleteSubject = (subjectId) => {
   return {
@@ -27,14 +27,14 @@ export const deleteSubject = (subjectId) => {
       subjectId
     }
   }
-}
+};
 
 export const fetchSubjects = (subjects) => {
   return {
     type: FETCH_SUBJECTS,
     payload: subjects
   }
-}
+};
 
 export const loadSubjects = () => {
   return async dispatch => {
@@ -48,4 +48,4 @@ export const loadSubjects = () => {
       dispatch(asyncActionError());
     }
   }
-}
+};

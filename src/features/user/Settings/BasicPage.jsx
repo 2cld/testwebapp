@@ -68,7 +68,7 @@ class BasicPage extends Component {
       </Segment>
     );
   }
-}
+};
 
 export default reduxForm({ form: 'userProfile', enableReinitialize: true, destroyOnUnmount: false })(
   BasicPage

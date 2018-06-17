@@ -1,25 +1,22 @@
 import React, { Component } from 'react';
 import { Segment, Grid, Icon, Button } from 'semantic-ui-react';
-import SessionDetailMap from './SessionDetailMap'
+import SessionDetailMap from './SessionDetailMap';
 import format from 'date-fns/format';
 
-/*const SessionDetailInfo = ({session}) => { */
 class SessionDetailInfo extends Component {
   state = {
     showMap: false
-  }
-
+  };
   componentWillUnmount() {
     this.setState({
         showMap: false
     })
-  }
-
+  };
   showMapToggle = () => {
     this.setState(prevState => ({
       showMap: !prevState.showMap
     }))
-  }
+  };
 
   render() {
     const { session } = this.props;
@@ -67,6 +64,6 @@ class SessionDetailInfo extends Component {
       </Segment.Group>
     );
   }
-}
+};
 
 export default SessionDetailInfo;

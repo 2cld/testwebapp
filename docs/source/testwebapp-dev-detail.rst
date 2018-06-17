@@ -1342,7 +1342,12 @@ Step-13 - testwebapp-checkpoint-13_
 The SESSION_CHAT Step-13 intent is to create structure for session chat system.
 
 #. Create SESSION_CHAT for testwebapp-checkpoint-13_
-#. Edit 
+#. Edit sessionActions.jsx add a addSessionComment function that
+#. Hook into SessionDetailPage to pass addSessionComment to SessionDetailChat.jsx
+#. Add createDataTree to function to app/common/util/helpers.js
+#. Edit SessionDetailChat.jsx to accept chat data
+#. Create SessionDetailChatForm.jsx to create SessionDetailChatForm componet
+#. git commit before I clean up code
 
 #. Produce testwebapp-checkpoint-13_ SESSION_CHAT ::
 

@@ -7,15 +7,14 @@ class SubjectList extends Component {
     this.state = {
       search: ''
     }
-  }
+  };
 
   updateSearch(event) {
     this.setState({search: event.target.value.substr(0,20)});
-  }
+  };
 
   render() {
     const { subjects, onSubjectOpen, deleteSubject } = this.props;
-    
     let filteredSubjects = subjects.filter(
       (subject) => {
         return subject.title.indexOf(this.state.search) !== -1;
@@ -41,6 +40,6 @@ class SubjectList extends Component {
       </div>
     );
   }
-}
+};
 
 export default SubjectList;

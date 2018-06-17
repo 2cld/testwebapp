@@ -8,18 +8,16 @@ import PhotosPage from './PhotosPage';
 import AccountPage from './AccountPage';
 import BasicPage from './BasicPage';
 import { updatePassword } from '../../auth/authActions';
-import { updateProfile } from '../userActions'
+import { updateProfile } from '../userActions';
 
 const actions = {
   updatePassword,
   updateProfile
 };
-
 const mapState = (state) => ({
   providerId: state.firebase.auth.providerData[0].providerId,
   user: state.firebase.profile
-})
-
+});
 const SettingsDashboard = ({ updatePassword, providerId, user, updateProfile }) => {
   return (
     <Grid>

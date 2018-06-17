@@ -100,6 +100,6 @@ class TestComponent extends Component {
       </div>
     )
   }
-}
+};
 
-export default connect(mapState, actions)(TestComponent)
+export default connect(mapState, actions)(TestComponent);

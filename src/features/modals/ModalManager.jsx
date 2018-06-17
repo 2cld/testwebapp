@@ -8,15 +8,14 @@ const modalLookup = {
   TestModal,
   LoginModal,
   RegisterModal
-}
+};
 
 const mapState = (state) => ({
   currentModal: state.modals
-})
+});
 
 const ModalManager = ({currentModal}) => {
   let renderedModal;
-
   if (currentModal) {
     const {modalType, modalProps} = currentModal;
     const ModalComponent = modalLookup[modalType];
@@ -24,6 +23,6 @@ const ModalManager = ({currentModal}) => {
     renderedModal = <ModalComponent {...modalProps}/>
   }
   return <span>{renderedModal}</span>
-}
+};
 
 export default connect(mapState)(ModalManager)

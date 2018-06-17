@@ -4,7 +4,7 @@ import { reduxForm, Field } from 'redux-form';
 import moment from 'moment';
 import cuid from 'cuid';
 import { Segment, Form, Button, Grid, Header } from 'semantic-ui-react';
-import { composeValidators, combineValidators, isRequired, hasLengthGreaterThan } from 'revalidate'
+import { composeValidators, combineValidators, isRequired, hasLengthGreaterThan } from 'revalidate';
 import { createSubject, updateSubject } from '../subjectActions';
 import TextInput from '../../../app/common/form/TextInput';
 import TextArea from '../../../app/common/form/TextArea';
@@ -14,18 +14,15 @@ import DateInput from '../../../app/common/form/DateInput';
 const mapState = (state, ownProps) => {
   const subjectId = ownProps.match.params.id;
   let subject = {};
-
   if (subjectId && state.subjects.length > 0) {
     subject = state.subjects.filter(subject => subject.id === subjectId)[0]
   }
   return { initialValues: subject }
-}
-
+};
 const actions = {
   createSubject,
   updateSubject
-}
-
+};
 const category = [
   {key: 'physics', text: 'Physics', value: 'physics'},
   {key: 'chemistry', text: 'Chemistry', value: 'chemistry'},
@@ -34,7 +31,6 @@ const category = [
   {key: 'math', text: 'Math', value: 'math'},
   {key: 'engieering', text: 'Engineering', value: 'engieering'},
 ];
-
 const validate = combineValidators({
   title: isRequired({message: 'The event title is required'}),
   category: isRequired({message: 'Please provide a category'}),
@@ -48,7 +44,6 @@ const validate = combineValidators({
 });
 
 class SubjectForm extends Component {
-
   onFormSubmit = values => {
     values.date = moment(values.date).format()
     if (this.props.initialValues.id) {
@@ -128,7 +123,7 @@ class SubjectForm extends Component {
       </Grid>
     );
   }
-}
+};
 
 export default connect(mapState, actions)(
   reduxForm({ form: 'subjectForm', enableReinitialize: true, validate })(SubjectForm)

@@ -1,6 +1,6 @@
-import { SubmissionError, reset } from 'redux-form'
-import { closeModal } from '../modals/modalActions'
-import { toastr } from 'react-redux-toastr'
+import { SubmissionError, reset } from 'redux-form';
+import { closeModal } from '../modals/modalActions';
+import { toastr } from 'react-redux-toastr';
 
 export const login = (creds) => {
   return async (dispatch, getState, {getFirebase})=> {
@@ -15,7 +15,7 @@ export const login = (creds) => {
       })
     }
   }
-} 
+};
 
 export const registerUser = (user) => 
   async (dispatch, getState, {getFirebase, getFirestore}) => {
@@ -42,7 +42,7 @@ export const registerUser = (user) =>
         _error: error.message
       })
     }
-  }
+  };
 
 export const socialLogin = (selectedProvider) =>
   async (dispatch, getState, {getFirebase, getFirestore}) => {
@@ -58,14 +58,13 @@ export const socialLogin = (selectedProvider) =>
       if (user.additionalUserInfo.isNewUser) {
         await firestore.set(`users/${user.user.uid}`, {
           displayName: user.profile.displayName,
-          photoURL: user.profile.avatarUrl /*,
-          createdAt: firestore.FieldValue.serverTimestamp()*/
+          photoURL: user.profile.avatarUrl 
         })
       }
     } catch (error) {
       console.log(error);
     }
-  }
+  };
 
 export const updatePassword = (creds) =>
   async (dispatch, getState, {getFirebase}) => {
@@ -80,4 +79,5 @@ export const updatePassword = (creds) =>
         _error: error.message
       })
     }
-  }
+  };
+  

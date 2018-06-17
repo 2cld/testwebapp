@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 const SubjectDetailPage = () => {
   return (
@@ -6,6 +6,6 @@ const SubjectDetailPage = () => {
       <h1>SubjectDetailPage</h1>
     </div>
   )
-}
+};
 
-export default SubjectDetailPage
+export default SubjectDetailPage;

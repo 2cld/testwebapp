@@ -46,6 +46,6 @@ class SessionListItem extends Component {
       </Segment.Group>
     );
   }
-}
+};
 
 export default SessionListItem;

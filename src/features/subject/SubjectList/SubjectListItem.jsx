@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-import { Segment, Item, /*Icon, List,*/ Button } from 'semantic-ui-react';
+import { Segment, Item, Button } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
-//import SubjectListProvider from './SubjectListProvider'
 
 class SubjectListItem extends Component {
   render() {
-    const {/*key,*/ subject/*, onSubjectOpen, deleteSubject*/} = this.props
+    const { subject } = this.props
     return (
       <Segment.Group>
         <Segment>
@@ -21,33 +20,13 @@ class SubjectListItem extends Component {
             </Item>
           </Item.Group>
         </Segment>
-{/*
-        <Segment>
-          <span>
-            <Icon name="clock" /> {subject.date}|
-            <Icon name="marker" /> {subject.venue}
-          </span>
-        </Segment>
-        <Segment secondary>
-          <List horizontal>
-          {subject.attendees && subject.attendees.map((attendee) => (
-            <SubjectListProvider key={attendee.id} attendee={attendee}/>
-          ))}
-
-          </List>
-        </Segment>
-*/}
         <Segment clearing>
           <span>{subject.description}</span>
-          {/*
-          <Button onClick={deleteSubject(subject.id)} as="a" color="red" floated="right" content="Delete" />
-          <Button onClick={onSubjectOpen(subject)} as="a" color="teal" floated="right" content="View" />
-          */}
           <Button as={Link} to={`/subject/${subject.id}`} color="teal" floated="right" content="ViewForm" />
         </Segment>
       </Segment.Group>
     );
   }
-}
+};
 
 export default SubjectListItem;

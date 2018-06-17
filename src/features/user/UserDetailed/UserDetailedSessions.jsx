@@ -1,15 +1,14 @@
 import React from 'react';
-import { Card, Grid, Header, Image, /*Menu,*/ Segment, Tab } from 'semantic-ui-react';
-import { Link } from 'react-router-dom'
-import format from 'date-fns/format'
+import { Card, Grid, Header, Image, Segment, Tab } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
+import format from 'date-fns/format';
 
 const panes = [
   {menuItem: 'All Sessions', pane: {key: 'allSessions'}},
   {menuItem: 'Past Sessions', pane: {key: 'pastSessions'}},
   {menuItem: 'Future Sessions', pane: {key: 'futureSessions'}},
   {menuItem: 'Hosting', pane: {key: 'hosted'}},
-]
-
+];
 const UserDeteiledSessions = ({ sessions, sessionsLoading, changeTab }) => {
   return (
     <Grid.Column width={12}>

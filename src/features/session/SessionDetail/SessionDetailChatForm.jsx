@@ -21,6 +21,6 @@ class SessionDetailChatForm extends Component {
       </Form>
     );
   }
-}
+};
 
 export default reduxForm({ Fields: 'comment' })(SessionDetailChatForm);

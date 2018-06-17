@@ -4,7 +4,7 @@ import {
   COUNTER_ACTION_DONE, 
   COUNTER_ACTION_START 
 } from './testConstants';
-import { createReducer } from '../../app/common/util/reducerUtil'
+import { createReducer } from '../../app/common/util/reducerUtil';
 
 const initialState = {
   data: 43,
@@ -13,19 +13,19 @@ const initialState = {
 
 export const incrementCounter = (state, payload) => {
   return { ...state, data: state.data + 1 };
-}
+};
 
 export const decrementCounter = (state, payload) => {
   return { ...state, data: state.data - 1 };
-}
+};
 
 export const counterActionStart = (state, payload) => {
   return {...state, loading: true}
-}
+};
 
 export const counterActionDone = (state, payload) => {
   return {...state, loading: false}
-}
+};
 
 // const testReducer = (state = initialState, action) => {
 //   switch (action.type) {

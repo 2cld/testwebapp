@@ -1,11 +1,11 @@
 import React from 'react';
 import { Modal } from 'semantic-ui-react';
-import { closeModal } from './modalActions'
-import { connect } from 'react-redux'
+import { closeModal } from './modalActions';
+import { connect } from 'react-redux';
 
 const actions = {
   closeModal
-}
+};
 
 const TestModal = ({closeModal}) => {
   return (

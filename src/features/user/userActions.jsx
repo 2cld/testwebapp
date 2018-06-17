@@ -102,7 +102,7 @@ export const setMainPhoto = photo =>
     }
   };
 
-  export const goingToSession = (session) => 
+export const goingToSession = (session) => 
   async (dispatch, getState, {getFirestore}) => {
     const firestore = getFirestore();
     const user = firestore.auth().currentUser;

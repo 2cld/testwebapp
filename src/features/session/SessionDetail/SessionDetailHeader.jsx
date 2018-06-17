@@ -1,12 +1,11 @@
 import React from 'react';
 import { Segment, Image, Item, Header, Button } from 'semantic-ui-react';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 import format from 'date-fns/format';
 
 const sessionImageStyle = {
     filter: 'brightness(30%)'
 };
-
 const sessionImageTextStyle = {
     position: 'absolute',
     bottom: '5%',
@@ -15,7 +14,6 @@ const sessionImageTextStyle = {
     height: 'auto',
     color: 'white'
 };
-
 const SessionDetailHeader = ({session, isHost, isGoing, goingToSession, cancelGoingToSession}) => {
   let sessionDate;
   if (session.date) {
@@ -25,7 +23,6 @@ const SessionDetailHeader = ({session, isHost, isGoing, goingToSession, cancelGo
     <Segment.Group>
       <Segment basic attached="top" style={{ padding: '0' }}>
         <Image src={`/assets/categoryImages/${session.category}.jpg`} fluid style={sessionImageStyle} />
-
         <Segment basic style={sessionImageTextStyle}>
         <Item.Group>
             <Item>
@@ -44,7 +41,6 @@ const SessionDetailHeader = ({session, isHost, isGoing, goingToSession, cancelGo
           </Item.Group>
         </Segment>
       </Segment>
-
       <Segment attached="bottom" >
         {!isHost && (
           <div>

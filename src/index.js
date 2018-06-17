@@ -10,11 +10,9 @@ import App from "./app/layout/App";
 import registerServiceWorker from "./registerServiceWorker";
 import { configureStore } from "./app/store/configureStore";
 import ScrollToTop from './app/common/util/ScrollToTop';
-//import { loadSessions } from './features/session/sessionActions'
-import { loadSubjects } from './features/subject/subjectActions'
+import { loadSubjects } from './features/subject/subjectActions';
 
 const store = configureStore();
-//store.dispatch(loadSessions());
 store.dispatch(loadSubjects());
 const rootEl = document.getElementById("root");
 
@@ -45,4 +43,4 @@ if (module.hot) {
 store.firebaseAuthIsReady.then(() => {
   render();
   registerServiceWorker();
-})
+});

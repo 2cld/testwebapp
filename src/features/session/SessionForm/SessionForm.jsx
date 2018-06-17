@@ -3,8 +3,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { reduxForm, Field } from 'redux-form';
 import { withFirestore } from 'react-redux-firebase';
-//import moment from 'moment';
-//import cuid from 'cuid';
 import Script from 'react-load-script';
 import { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
 import { Segment, Form, Button, Grid, Header } from 'semantic-ui-react';
@@ -26,23 +24,11 @@ const mapState = (state, ownProps) => {
     session
   };
 };
-/* old
-const mapState = (state, ownProps) => {
-  const sessionId = ownProps.match.params.id;
-  let session = {};
-  if (sessionId && state.sessions.length > 0) {
-    session = state.sessions.filter(session => session.id === sessionId)[0]
-  }
-  return { initialValues: session, session  }
-}
-*/
-
 const actions = {
   createSession,
   updateSession,
   cancelToggle
-}
-
+};
 const category = [
   {key: 'physics', text: 'Physics', value: 'physics'},
   {key: 'chemistry', text: 'Chemistry', value: 'chemistry'},
@@ -51,7 +37,6 @@ const category = [
   {key: 'math', text: 'Math', value: 'math'},
   {key: 'engineering', text: 'Engineering', value: 'engineering'},
 ];
-
 const validate = combineValidators({
   title: isRequired({message: 'The session title is required'}),
   category: isRequired({message: 'Please provide a category'}),
@@ -73,13 +58,11 @@ class SessionForm extends Component {
   async componentDidMount() {
     const {firestore, match} = this.props;
     await firestore.setListener(`sessions/${match.params.id}`);
-  }
-
+  };
   async componentWillUnmount() {
     const {firestore, match} = this.props;
     await firestore.unsetListener(`sessions/${match.params.id}`);
-  }
-
+  };
   handleScriptLoaded = () => this.setState({ scriptLoaded: true });
   handleCitySelect = selectedCity => {
     geocodeByAddress(selectedCity)
@@ -105,24 +88,6 @@ class SessionForm extends Component {
         this.props.change('venue', selectedVenue)
       })
   };
-  /* Old pre firestore
-  onFormSubmit = values => {
-    values.date = moment(values.date).format();
-    values.venueLatLng = this.state.venueLatLng;
-    if (this.props.initialValues.id) {
-      this.props.updateSession(values);
-      this.props.history.goBack();
-    } else {
-      const newSession = {
-        ...values,
-        id: cuid(),
-        hostPhotoURL: '/assets/user.png',
-        hostedBy: 'Bob'
-      };
-      this.props.createSession(newSession);
-      this.props.history.push('/sessions');
-    }
-  }; */
   onFormSubmit = values => {
     values.venueLatLng = this.state.venueLatLng;
     if (this.props.initialValues.id) {
@@ -170,13 +135,6 @@ class SessionForm extends Component {
                 placeholder="Tell us about your Session"
               />
               <Header sub color='teal' content='Session Location details'/>
-              {/* Pre-PlaceInput
-              <Field
-                name="city"
-                type="text"
-                component={TextInput}
-                placeholder="Session city"
-              />*/}
               <Field
                 name="city"
                 type="text"
@@ -185,14 +143,6 @@ class SessionForm extends Component {
                 placeholder="Event city"
                 onSelect={this.handleCitySelect}
               />
-              {/* Pre-PlaceInput
-              <Field
-                name="venue"
-                type="text"
-                component={TextInput}
-                placeholder="Session venue"
-              />
-              />*/}
               {this.state.scriptLoaded &&
               <Field
                 name="venue"
@@ -234,7 +184,7 @@ class SessionForm extends Component {
       </Grid>
     );
   }
-}
+};
 
 export default withFirestore(
   connect(mapState, actions)(
