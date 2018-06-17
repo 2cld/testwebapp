@@ -173,3 +173,25 @@ export const loadSessions = () => {
   }
 };
 */
+
+export const addSessionComment = (sessionId, values, parentId) => 
+  async (dispatch, getState, {getFirebase}) => {
+    const firebase = getFirebase();
+    const profile = getState().firebase.profile;
+    const user = firebase.auth().currentUser;
+    let newComment = {
+      parentId: parentId,
+      displayName: profile.displayName,
+      photoURL: profile.photoURL || '/assets/user.png',
+      uid: user.uid,
+      text: values.comment,
+      date: Date.now()
+    }
+    try {
+      await firebase.push(`session_chat/${sessionId}`, newComment)
+    } catch (error) {
+      console.log(error);
+      toastr.error('Oops', 'Problem adding comment')
+    }
+  };
+

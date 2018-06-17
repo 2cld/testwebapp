@@ -1336,6 +1336,31 @@ The SESSIONS_FIRESTORE Step-12 intent is to put sessions transactional data flow
     
 #. Verify checkpoint testwebapp-checkpoint-12_
 
+Step-13 - testwebapp-checkpoint-13_
+-----------------------------------
+
+The SESSION_CHAT Step-13 intent is to create structure for session chat system.
+
+#. Create SESSION_CHAT for testwebapp-checkpoint-13_
+#. Edit 
+
+#. Produce testwebapp-checkpoint-13_ SESSION_CHAT ::
+
+    macci:testwebapp cat$ cd ~/bast23/testwebapp/docs
+    macci:docs cat$ vi source/testwebapp-dev-detail.rst (update doc)
+    macci:docs cat$ vi source/conf.py (Bump minor version to X.X.NN to match checkpoint-13)
+    macci:docs cat$ make html 
+    macci:docs cat$ open build/html/index.html (verify docs)
+    macci:testwebapp cat$ cd ~/bast23/testwebapp
+    macci:testwebapp cat$ git add *
+    macci:testwebapp cat$ git commit -m "commit for testwebapp-checkpoint-13 - SESSION_CHAT"
+    macci:testwebapp cat$ git tag testwebapp-checkpoint-13
+    macci:testwebapp cat$ git push
+    macci:testwebapp cat$ git push origin testwebapp-checkpoint-13
+    
+#. Verify checkpoint testwebapp-checkpoint-13_
+
+
 Step Template
 =============
 
