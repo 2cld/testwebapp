@@ -10,12 +10,16 @@ class SubjectListItem extends Component {
         <Segment>
           <Item.Group>
             <Item>
-              <Item.Image size="tiny" circular src={subject.hostPhotoURL} />
+              <Item.Image size="tiny" circular src={subject.image_url} />
               <Item.Content>
-                <Item.Header as="a">{subject.title}</Item.Header>
-                <Item.Description>
+                <Item.Header as="a">{subject.name}</Item.Header>
+                <hr/>
+                <Item.Description as="a">{subject.category}</Item.Description>
+                <hr/>
+                <Item.Description as="a">{subject.location}</Item.Description>
+                {/*<Item.Description>
                   GooberU by <a>{subject.hostedBy}</a>
-                </Item.Description>
+                </Item.Description>*/}
               </Item.Content>
             </Item>
           </Item.Group>

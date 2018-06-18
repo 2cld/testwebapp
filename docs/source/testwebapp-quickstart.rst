@@ -4,7 +4,7 @@ testwebapp quickstart
 Steps
 -----
 
-#. Get project repo gooberu-testwebapp_ 
+#. Get project repo gooberu-testwebapp_ ::
 
     macci:bast23 cat$ git clone https://github.com/gooberu/testwebapp.git
     macci:bast23 cat$ cd testwebapp

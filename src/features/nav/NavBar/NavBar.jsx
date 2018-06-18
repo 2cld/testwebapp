@@ -52,6 +52,14 @@ class NavBar extends Component {
               positive
               inverted
               content="Create Session"
+            />           
+            <Button
+            as={Link}
+            to="/createSubject"
+            floated="right"
+            positive
+            inverted
+            content="Create Subject"
             />
           </Menu.Item>}
           {authenticated ? (

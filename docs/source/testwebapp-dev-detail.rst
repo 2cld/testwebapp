@@ -1365,6 +1365,31 @@ The SESSION_CHAT Step-13 intent is to create structure for session chat system.
     
 #. Verify checkpoint testwebapp-checkpoint-13_
 
+Step-14 - testwebapp-checkpoint-14_
+-----------------------------------
+
+The SUBJECT_CRUD Step-14 intent is to get SUBJECT CRUD into Firebase and also a first attempt to abstract keys out of the github source.
+
+#. Create SUBJECT_CRUD for testwebapp-checkpoint-14_
+
+    #. tbd  
+    #. tbd 
+
+#. Produce testwebapp-checkpoint-14_ SUBJECT_CRUD ::
+
+    macci:testwebapp cat$ cd ~/bast23/testwebapp/docs
+    macci:docs cat$ vi source/testwebapp-dev-detail.rst (update doc)
+    macci:docs cat$ vi source/conf.py (Bump minor version to X.X.NN to match checkpoint-14)
+    macci:docs cat$ make html 
+    macci:docs cat$ open build/html/index.html (verify docs)
+    macci:testwebapp cat$ cd ~/bast23/testwebapp
+    macci:testwebapp cat$ git add *
+    macci:testwebapp cat$ git commit -m "commit for testwebapp-checkpoint-14 - SUBJECT_CRUD"
+    macci:testwebapp cat$ git tag testwebapp-checkpoint-14
+    macci:testwebapp cat$ git push
+    macci:testwebapp cat$ git push origin testwebapp-checkpoint-14
+    
+#. Verify checkpoint testwebapp-checkpoint-14_
 
 Step Template
 =============

@@ -15,10 +15,11 @@ class SubjectList extends Component {
 
   render() {
     const { subjects, onSubjectOpen, deleteSubject } = this.props;
+    // let filteredSubjects = subjects;
     let filteredSubjects = subjects.filter(
       (subject) => {
-        return subject.title.indexOf(this.state.search) !== -1;
-      }
+        return subject.description.indexOf(this.state.search) !== -1;
+      } 
     );
     
     return (

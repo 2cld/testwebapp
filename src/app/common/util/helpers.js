@@ -6,6 +6,14 @@ export const objectToArray = (object) => {
   }
 };
 
+export const createNewSubject = (subject) => {
+  subject.date = moment(subject.date).toDate();
+  return {
+    ...subject,
+//    date: Date.now()
+  }
+};
+
 export const createNewSession = (user, photoURL, session) => {
   session.date = moment(session.date).toDate();
   return {

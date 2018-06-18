@@ -1,0 +1,7 @@
+GOOBERU_API_KEY="yourAPIkey"
+GOOBERU_SENDERID="yourSENDERID"
+GOOBERU_MAPS_KEY="yourMAPSApiKey"
+GOOBERU_MAPS_URL="https://maps.googleapis.com/maps/api/js?key=YourMAPSApiKey&libraries=places"
+
+
+

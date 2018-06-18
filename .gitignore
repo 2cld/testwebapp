@@ -22,6 +22,9 @@ yarn-error.log*
 
 #######################
 # readthedocs gitignore
-
 # sphinx build folder
 docs/build/
+
+#######################
+# API Key gitignore
+app-keys.js
