@@ -8,7 +8,7 @@ Steps
 
     macci:bast23 cat$ git clone https://github.com/gooberu/testwebapp.git
     macci:bast23 cat$ cd testwebapp
-    macci:testwebapp cat$ npm install
+    macci:testwebapp cat$ yarn install
     macci:testwebapp cat$ yarn start
 
 #. Verify application in browser http://localhost:3000/

@@ -1372,7 +1372,7 @@ The SUBJECT_CRUD Step-14 intent is to get SUBJECT CRUD into Firebase and also a 
 
 #. Create SUBJECT_CRUD for testwebapp-checkpoint-14_
 
-    #. tbd  
+    #. need to back-fill changes  
     #. tbd 
 
 #. Produce testwebapp-checkpoint-14_ SUBJECT_CRUD ::
@@ -1390,6 +1390,77 @@ The SUBJECT_CRUD Step-14 intent is to get SUBJECT CRUD into Firebase and also a 
     macci:testwebapp cat$ git push origin testwebapp-checkpoint-14
     
 #. Verify checkpoint testwebapp-checkpoint-14_
+
+Step-15 - testwebapp-checkpoint-15_
+-----------------------------------
+
+The FirebaseDeploy Step-15 intent is to deploy to firebase for external feature review.
+
+#. Create FirebaseDeploy for testwebapp-checkpoint-15_
+#. Cleanup - Page not found
+    #. Create src/app/layout/NotFound.jsx
+    #. Add NotFound to route in src/app/layout/App.jsx
+    #. Add check in src/features/session/SessionDetail/SessionDetailPage.jsx in the componentDidMount
+    #. Add requesting: state.firestore.status.requesting to mapState so we don't get stuck on loading.
+#. Build application
+    #. stop server 
+    #. npm run build 
+    #. npm run analyze
+#. Code Split to reduce load size ?maybe another time?
+    #. replace components with AsyncComponent ( HomePage > AsyncHomePage )
+#. Test build
+    #. yarn global add serve
+    #. serve -s build
+    #. browse at localhost:5000 to verify
+#. Add firebase CLI
+    #. npm install -g firebase-tools (if not installed)
+    #. firebase -h (verify cli)
+    #. firebase login
+    #. firebase init
+        #. Select "Functions" and "Hosting"
+        #. Select testscreens project
+        #. Select "javascript"
+        #. ESLint - Yes
+        #. Install npm Depends - Yes
+        #. (wait a while for loading)
+        #. public dir? - build
+        #. single-page app? y
+        #. overwrite index.html? n
+    #. put "functions/node_modules/** in .gitignore
+#. Update firebase service worker config::
+
+    "headers": [{
+      "source": "/service-workers.js",
+      "headers": [{
+        "key": "Cache-Control",
+        "value": "max-age=0"
+      }]
+    }]
+
+#. Deploy to Firebase
+    #. Add to package.json in "scripts" ::
+
+        "deploy": "npm run build && firebase deploy"
+
+    #. npm run deploy
+    #. Should get "Deploy complete!" should get hosturl to verify
+    #. Verify app at https://gooberu-testscreens.firebaseapp.com
+
+#. Produce testwebapp-checkpoint-15_ FirebaseDeploy ::
+
+    macci:testwebapp cat$ cd ~/bast23/testwebapp/docs
+    macci:docs cat$ vi source/testwebapp-dev-detail.rst (update doc)
+    macci:docs cat$ vi source/conf.py (Bump minor version to X.X.NN to match checkpoint-15)
+    macci:docs cat$ make html 
+    macci:docs cat$ open build/html/index.html (verify docs)
+    macci:testwebapp cat$ cd ~/bast23/testwebapp
+    macci:testwebapp cat$ git add *
+    macci:testwebapp cat$ git commit -m "commit for testwebapp-checkpoint-15 - FirebaseDeploy"
+    macci:testwebapp cat$ git tag testwebapp-checkpoint-15
+    macci:testwebapp cat$ git push
+    macci:testwebapp cat$ git push origin testwebapp-checkpoint-15
+    
+#. Verify checkpoint testwebapp-checkpoint-15_
 
 Step Template
 =============

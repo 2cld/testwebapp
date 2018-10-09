@@ -34,6 +34,26 @@ export const createNewSession = (user, photoURL, session) => {
   }
 };
 
+export const createNewRequest = (user, photoURL, request) => {
+  request.date = moment(request.date).toDate();
+  return {
+    ...request,
+    hostUid: user.uid,
+    hostedBy: user.displayName,
+    hostPhotoURL: photoURL || '/assets/user.png',
+    created: Date.now(),
+    attendees: {
+      [user.uid]: {
+        going: true,
+        joinDate: Date.now(),
+        photoURL: photoURL || '/assets/user.png',
+        displayName: user.displayName,
+        host: true
+      }
+    }
+  }
+};
+
 export const createDataTree = dataset => {
   let hashTable = Object.create(null);
   dataset.forEach(a => hashTable[a.id] = {...a, childNodes: []});
